@@ -21,3 +21,4 @@ env/
 # ---- Secrets / OS ----
 .env
 .DS_Store
+artifacts/*.log
