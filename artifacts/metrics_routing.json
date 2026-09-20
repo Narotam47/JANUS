@@ -1,0 +1,65 @@
+{
+  "description": "Three-tier routing evaluation on the enriched model's test set.",
+  "thresholds": {
+    "prob_block": 0.9497,
+    "conf_stepup": 0.75,
+    "coldstart_max": 8
+  },
+  "structural_check_suspicious_review": {
+    "description": "Diagnostic band [0.90, prob_block) evaluated for whether a 'high prob + high confidence but below block threshold' review tier could ever fire.",
+    "band_lo": 0.9,
+    "band_hi": 0.9496600031852722,
+    "n_in_band": 809,
+    "theoretical_confidence_ceiling": 0.7079,
+    "conf_stepup": 0.75,
+    "structurally_unreachable": true,
+    "observed_n_high_conf_in_band": 0
+  },
+  "routing_distribution": {
+    "block": {
+      "count": 1424,
+      "pct": 0.0779
+    },
+    "step_up": {
+      "count": 4323,
+      "pct": 0.2365
+    },
+    "approve": {
+      "count": 1822094,
+      "pct": 99.6856
+    }
+  },
+  "block_quality": {
+    "tp": 1223,
+    "fp": 201,
+    "precision": 0.8588
+  },
+  "stepup_analysis": {
+    "total": 4323,
+    "fraud_caught": 788,
+    "legit_friction": 3535,
+    "stepup_rate_of_legit": 0.001936,
+    "binary_fps_rescued": 248,
+    "binary_fns_caught": 366
+  },
+  "approval_cost": {
+    "total": 1822094,
+    "missed_fraud": 272,
+    "missed_fraud_rate": 0.000149
+  },
+  "vs_binary": {
+    "binary_tp": 1645,
+    "binary_fp": 449,
+    "binary_recall": 0.7205,
+    "binary_block_precision": 0.7856,
+    "router_block_precision": 0.8588,
+    "recall_block_only": 0.5357,
+    "recall_block_plus_stepup": 0.8809
+  },
+  "first_mcc_fps": {
+    "binary_fps": 29,
+    "rescued_to_stepup": 29,
+    "rescued_to_approve": 0,
+    "still_blocked": 0
+  }
+}

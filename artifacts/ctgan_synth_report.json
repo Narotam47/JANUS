@@ -1,0 +1,145 @@
+{
+  "description": "CTGAN-generated synthetic fraud transactions for steps 20-21's adversarial training loop.",
+  "honest_context": "Trained on only 9,220 real fraud rows \u2014 small for a GAN. See 'loss_curve' for whether training converged cleanly. 'extrapolation_flags' in 'generation_report.key_feature_comparison' show where synthetic values fall outside the real fraud sample's observed range.",
+  "config": {
+    "n_real_fraud_rows": 9220,
+    "n_feature_cols": 33,
+    "n_discrete_cols": 15,
+    "excluded_cols": [
+      "User",
+      "label",
+      "same_month_last_year_mean",
+      "amount_vs_last_year_ratio"
+    ],
+    "ctgan_epochs": 1000,
+    "ctgan_batch_size": 500,
+    "n_synthetic_generated": 5000,
+    "seed": 42
+  },
+  "real_fraud_pre_training_stats": {
+    "amount_raw": {
+      "mean": 0.8305394649505615,
+      "std": 2.5347506999969482,
+      "min": -6.690331935882568,
+      "max": 46.386226654052734
+    },
+    "user_amount_zscore": {
+      "mean": 0.9422741532325745,
+      "std": 2.9491240978240967,
+      "min": -17.585979461669922,
+      "max": 60.055763244628906
+    },
+    "user_hist_mean": {
+      "mean": 45.53681564331055,
+      "std": 16.784204483032227,
+      "min": 7.653470516204834,
+      "max": 145.14114379882812
+    },
+    "real_correlations": {
+      "amount_raw|user_amount_zscore": {
+        "r": 0.9297428131103516,
+        "p": 0.0
+      },
+      "merchant_user_count|mcc_user_count": {
+        "r": 0.5981556660042268,
+        "p": 0.0
+      }
+    }
+  },
+  "loss_curve": {
+    "available": true,
+    "n_epochs": 1000,
+    "generator_loss_final": -1.2045868635177612,
+    "discriminator_loss_final": 0.3491383194923401,
+    "generator_loss_std_full_run": 0.7254791518554813,
+    "generator_loss_std_last_10": 0.395925994620214,
+    "discriminator_loss_std_full_run": 0.3130649643866461,
+    "discriminator_loss_std_last_10": 0.48920317369427874,
+    "appears_settled": false
+  },
+  "generation_report": {
+    "key_feature_comparison": {
+      "amount_raw": {
+        "real": {
+          "mean": 0.8305394649505615,
+          "std": 2.5347506999969482,
+          "min": -6.690331935882568,
+          "max": 46.386226654052734
+        },
+        "synthetic": {
+          "mean": 0.8835588097572327,
+          "std": 1.9803110361099243,
+          "min": -6.201041221618652,
+          "max": 20.26679039001465
+        }
+      },
+      "user_amount_zscore": {
+        "real": {
+          "mean": 0.9422741532325745,
+          "std": 2.9491240978240967,
+          "min": -17.585979461669922,
+          "max": 60.055763244628906
+        },
+        "synthetic": {
+          "mean": 1.3534770011901855,
+          "std": 3.1426100730895996,
+          "min": -12.484091758728027,
+          "max": 30.613414764404297
+        }
+      },
+      "user_hist_mean": {
+        "real": {
+          "mean": 45.53681564331055,
+          "std": 16.784204483032227,
+          "min": 7.653470516204834,
+          "max": 145.14114379882812
+        },
+        "synthetic": {
+          "mean": 45.587955474853516,
+          "std": 16.031291961669922,
+          "min": 10.704352378845215,
+          "max": 112.67540740966797
+        }
+      }
+    },
+    "extrapolation_flags": {
+      "amount_raw": {
+        "n_below_real_min": 0,
+        "n_above_real_max": 0,
+        "pct_outside_real_range": 0.0
+      },
+      "user_amount_zscore": {
+        "n_below_real_min": 0,
+        "n_above_real_max": 0,
+        "pct_outside_real_range": 0.0
+      },
+      "user_hist_mean": {
+        "n_below_real_min": 0,
+        "n_above_real_max": 0,
+        "pct_outside_real_range": 0.0
+      }
+    },
+    "correlation_comparison": {
+      "amount_raw|user_amount_zscore": {
+        "real_r": 0.9297428131103516,
+        "synthetic_r": 0.5288122296333313,
+        "abs_delta": 0.40093058347702026
+      },
+      "merchant_user_count|mcc_user_count": {
+        "real_r": 0.5981556660042268,
+        "synthetic_r": 0.29738329450731266,
+        "abs_delta": 0.3007723714969141
+      }
+    }
+  },
+  "output": {
+    "path": "artifacts/synthetic_fraud.parquet",
+    "n_rows": 5000,
+    "n_cols": 33,
+    "file_size_mb": 0.477
+  },
+  "runtime_seconds": {
+    "ctgan_training": 597.58,
+    "total": 598.48
+  }
+}

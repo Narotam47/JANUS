@@ -1,0 +1,31 @@
+{
+  "description": "Fusion due diligence for the GraphSAGE result (step 24) \u2014 one minimal weighted-average experiment, not a tuned fusion, confirming the null result honestly.",
+  "inputs": {
+    "tabular_auc_pr_recorded": 0.817069,
+    "gnn_auc_pr_recorded_full_edge_set": 0.026443
+  },
+  "fusion_experiment": {
+    "weights": {
+      "tabular": 0.9,
+      "gnn": 0.1
+    },
+    "population": "1,827,841 test windows (intersection of tabular-scorable and graph-scorable transactions; see module docstring on alignment)",
+    "auc_pr_tabular_alone": 0.817069,
+    "auc_pr_gnn_alone_aligned_subset": 0.027006,
+    "auc_pr_fusion": 0.812614,
+    "delta_fusion_vs_tabular": -0.004455,
+    "null_result_confirmed": true
+  },
+  "causes_identified": {
+    "sparse_node_features": "GNN nodes carry only 2-3 raw aggregate stats vs. the tabular model's 243 features per transaction.",
+    "weak_ring_structure": "Step 23: only 16.3% (train) / 30.0% (test) of fraud-touched merchants show meaningful excess clustering beyond visit frequency alone \u2014 a minority, not dominant, pattern."
+  },
+  "interpretation": {
+    "verdict": "GraphSAGE does not improve over the tabular model on TabFormer.",
+    "attribution": "Dataset limitation (TabFormer lacks genuine coordinated ring structure and the per-user tabular features already capture most available signal), not a failure of the GraphSAGE approach itself. On real fraud data with genuine coordinated rings, GraphSAGE would be expected to add value the per-user features cannot see."
+  },
+  "future_work": [
+    "Genuine multi-institution data with coordinated fraud rings (card-not-present fraud networks, synthetic identity fraud) would provide the ring structure TabFormer lacks.",
+    "Richer node-feature construction (full 243-feature vectors as node features, rather than 2-3 aggregate stats) might partially close the gap \u2014 a methodology improvement worth trying, not attempted here to avoid tuning toward a win after already seeing step 24's result."
+  ]
+}

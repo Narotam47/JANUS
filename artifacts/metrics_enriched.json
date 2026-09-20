@@ -1,0 +1,268 @@
+{
+  "model": "XGBoost enriched (Phase 1 features)",
+  "phase": "Phase 1 \u2014 enriched defender",
+  "data": {
+    "train_windows": 7330071,
+    "train_positives": 9220,
+    "train_positive_rate": 0.001258,
+    "test_windows": 1827841,
+    "test_positives": 2283,
+    "test_positive_rate": 0.001249,
+    "features_total": 243,
+    "features_window": 210,
+    "features_enriched": 33,
+    "scale_pos_weight": 794.0
+  },
+  "headline_metrics": {
+    "AUC_PR": 0.817069,
+    "ROC_AUC": 0.999024
+  },
+  "best_f1_threshold": {
+    "best_threshold": 0.9496600031852722,
+    "best_f1": 0.7516563856522731,
+    "precision_at_best": 0.7855778414517669,
+    "recall_at_best": 0.7205431449846693,
+    "n_thresholds_swept": 1658988
+  },
+  "at_default_threshold_0.5": {
+    "f1": 0.334655,
+    "precision": 0.20342,
+    "recall": 0.943057
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.10000447928905487,
+      "precision": 0.0659,
+      "recall": 0.9912,
+      "f1": 0.1236
+    },
+    {
+      "threshold": 0.2000119388103485,
+      "precision": 0.0963,
+      "recall": 0.9785,
+      "f1": 0.1753
+    },
+    {
+      "threshold": 0.30000707507133484,
+      "precision": 0.1273,
+      "recall": 0.9698,
+      "f1": 0.2251
+    },
+    {
+      "threshold": 0.4000076949596405,
+      "precision": 0.1628,
+      "recall": 0.9597,
+      "f1": 0.2784
+    },
+    {
+      "threshold": 0.5001053810119629,
+      "precision": 0.2034,
+      "recall": 0.9431,
+      "f1": 0.3347
+    },
+    {
+      "threshold": 0.6000588536262512,
+      "precision": 0.2558,
+      "recall": 0.9242,
+      "f1": 0.4007
+    },
+    {
+      "threshold": 0.7000141143798828,
+      "precision": 0.3276,
+      "recall": 0.901,
+      "f1": 0.4805
+    },
+    {
+      "threshold": 0.8001287579536438,
+      "precision": 0.4402,
+      "recall": 0.873,
+      "f1": 0.5853
+    },
+    {
+      "threshold": 0.9000221490859985,
+      "precision": 0.6287,
+      "recall": 0.7994,
+      "f1": 0.7038
+    }
+  ],
+  "latency_cpu_single_window": {
+    "n_runs": 1000,
+    "mean_ms": 0.2684,
+    "median_ms": 0.266,
+    "p95_ms": 0.2982,
+    "p99_ms": 0.3705,
+    "min_ms": 0.2275,
+    "max_ms": 0.4495
+  },
+  "training": {
+    "time_seconds": 1159.9,
+    "xgb_params": {
+      "n_estimators": 300,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "tree_method": "hist",
+      "eval_metric": "aucpr",
+      "random_state": 42,
+      "n_jobs": -1,
+      "scale_pos_weight": 794.0
+    }
+  },
+  "vs_baseline": {
+    "AUC_PR_delta": 0.061485,
+    "ROC_AUC_delta": 0.000306,
+    "best_f1_delta": 0.056225
+  },
+  "feature_importance_top30": [
+    {
+      "rank": 1,
+      "feature": "chip_Chip Transaction_t1",
+      "importance": 0.251569
+    },
+    {
+      "rank": 2,
+      "feature": "merchant_user_count",
+      "importance": 0.115601
+    },
+    {
+      "rank": 3,
+      "feature": "first_city_state",
+      "importance": 0.036857
+    },
+    {
+      "rank": 4,
+      "feature": "merch_large_tx_rate",
+      "importance": 0.021904
+    },
+    {
+      "rank": 5,
+      "feature": "merch_hist_amount_mean",
+      "importance": 0.018995
+    },
+    {
+      "rank": 6,
+      "feature": "mcc_user_count",
+      "importance": 0.016777
+    },
+    {
+      "rank": 7,
+      "feature": "hours_since_last_t2",
+      "importance": 0.015884
+    },
+    {
+      "rank": 8,
+      "feature": "pop_7d_avg_count",
+      "importance": 0.013537
+    },
+    {
+      "rank": 9,
+      "feature": "month_t1",
+      "importance": 0.012402
+    },
+    {
+      "rank": 10,
+      "feature": "amount_vs_last_year_ratio",
+      "importance": 0.011765
+    },
+    {
+      "rank": 11,
+      "feature": "day_of_week_t1",
+      "importance": 0.011108
+    },
+    {
+      "rank": 12,
+      "feature": "amount_log_t8",
+      "importance": 0.010988
+    },
+    {
+      "rank": 13,
+      "feature": "merch_amount_deviation",
+      "importance": 0.010566
+    },
+    {
+      "rank": 14,
+      "feature": "err_bad_card_number_t0",
+      "importance": 0.009601
+    },
+    {
+      "rank": 15,
+      "feature": "user_amount_zscore",
+      "importance": 0.009582
+    },
+    {
+      "rank": 16,
+      "feature": "merch_days_active",
+      "importance": 0.00936
+    },
+    {
+      "rank": 17,
+      "feature": "err_bad_zipcode_t7",
+      "importance": 0.009196
+    },
+    {
+      "rank": 18,
+      "feature": "err_bad_zipcode_t9",
+      "importance": 0.008633
+    },
+    {
+      "rank": 19,
+      "feature": "hour_t9",
+      "importance": 0.008577
+    },
+    {
+      "rank": 20,
+      "feature": "err_bad_cvv_t4",
+      "importance": 0.008406
+    },
+    {
+      "rank": 21,
+      "feature": "day_of_week_t3",
+      "importance": 0.008231
+    },
+    {
+      "rank": 22,
+      "feature": "day_of_week_t6",
+      "importance": 0.008069
+    },
+    {
+      "rank": 23,
+      "feature": "err_bad_cvv_t0",
+      "importance": 0.006973
+    },
+    {
+      "rank": 24,
+      "feature": "err_insufficient_balance_t9",
+      "importance": 0.006916
+    },
+    {
+      "rank": 25,
+      "feature": "same_month_last_year_mean",
+      "importance": 0.006898
+    },
+    {
+      "rank": 26,
+      "feature": "hour_t1",
+      "importance": 0.006859
+    },
+    {
+      "rank": 27,
+      "feature": "err_technical_glitch_t1",
+      "importance": 0.006615
+    },
+    {
+      "rank": 28,
+      "feature": "err_bad_card_number_t5",
+      "importance": 0.006199
+    },
+    {
+      "rank": 29,
+      "feature": "chip_Online Transaction_t9",
+      "importance": 0.006188
+    },
+    {
+      "rank": 30,
+      "feature": "amount_raw_t5",
+      "importance": 0.006029
+    }
+  ],
+  "peak_memory_mb": 7132.2
+}

@@ -1,0 +1,65 @@
+{
+  "description": "Adversarial retraining: real data + CTGAN synthetic fraud + harvested PPO evasions, evaluated against the original enriched model on both standard and adversarial test sets.",
+  "honest_context": {
+    "ctgan_feature_mismatch": "synthetic_fraud.parquet supplies 33 of 243 features (21 raw window-base columns -> the window block's t9 slot; 12 enriched columns -> their exact slots). The remaining 210 (189 window timesteps t0-t8, plus 21 enriched features CTGAN doesn't produce: same_month_last_year_mean, amount_vs_last_year_ratio, all 9 merch_*/pop_* features, all 10 flags) are filled with the MEAN of that feature among the 9,220 real fraud TRAINING windows \u2014 chosen over zero-padding (which would manufacture a fake all-zero history pattern) and over excluding CTGAN rows entirely (the task calls for using them as training augmentation).",
+    "evader_labeling": "Harvested evasions are real fraud transactions that were successfully disguised by the step-20 attacker \u2014 labeled fraud (1), and already complete 243-dim vectors, no reconstruction needed.",
+    "experimental_control": "Hyperparameters (scale_pos_weight=794.0, max_depth=6, learning_rate=0.1, n_estimators=300) are UNCHANGED from step 8, not recomputed for the new class balance \u2014 isolates the training-data change as the only variable.",
+    "adversarial_eval_scope": "Reuses step 20's ALREADY-TRAINED attacker policy (not retrained) against each model. This is a transfer-robustness check ('does the specific exploit still work'), not proof against a freshly adapted attacker."
+  },
+  "training_data": {
+    "n_real_rows": 7330071,
+    "n_real_fraud": 9220,
+    "n_synthetic_rows": 5000,
+    "n_evader_rows": 1094,
+    "n_total_rows": 7336165,
+    "n_total_fraud": 15314,
+    "xgb_params": {
+      "n_estimators": 300,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "tree_method": "hist",
+      "eval_metric": "aucpr",
+      "random_state": 42,
+      "n_jobs": -1,
+      "scale_pos_weight": 794.0
+    },
+    "train_time_seconds": 2361.72
+  },
+  "fixed_threshold": 0.9496600031852722,
+  "standard_evaluation": {
+    "original": {
+      "auc_pr": 0.8170694985524802,
+      "f1": 0.7516563856522732,
+      "precision": 0.7855778414517669,
+      "recall": 0.7205431449846693
+    },
+    "hardened": {
+      "auc_pr": 0.9189956831054028,
+      "f1": 0.7775916620137726,
+      "precision": 0.6760517799352751,
+      "recall": 0.9150240911081909
+    },
+    "auc_pr_change": 0.101926,
+    "f1_change": 0.025935
+  },
+  "adversarial_evaluation": {
+    "original": {
+      "n_catchable": 1645,
+      "evasion_rate_deterministic": 0.5884498480243161,
+      "evasion_rate_harvest": 0.6656534954407295,
+      "n_evaders_harvested": 1095
+    },
+    "hardened": {
+      "n_catchable": 2089,
+      "evasion_rate_deterministic": 0.004786979415988511,
+      "evasion_rate_harvest": 0.018190521780756343,
+      "n_evaders_harvested": 38
+    },
+    "evasion_rate_harvest_change": -0.647463,
+    "evasion_rate_deterministic_change": -0.583663
+  },
+  "outputs": {
+    "model_hardened": "artifacts/model_hardened.json"
+  },
+  "runtime_seconds": 2456.98
+}

@@ -1,0 +1,277 @@
+{
+  "description": "Diagnostic checking whether enriched model improvement is confounded by transaction position in the synthetic data.",
+  "part1_bucket_aucpr": {
+    "user_requested_buckets": [
+      {
+        "bucket": "16\u2013500",
+        "lo": 16,
+        "hi": 500,
+        "n_windows": 2777,
+        "n_fraud": 0,
+        "aucpr_base": null,
+        "aucpr_enr": null,
+        "delta": null,
+        "note": "too few fraud for AUC-PR"
+      },
+      {
+        "bucket": "500\u20132k",
+        "lo": 500,
+        "hi": 2000,
+        "n_windows": 3951,
+        "n_fraud": 2,
+        "aucpr_base": 0.5217,
+        "aucpr_enr": 1.0,
+        "delta": 0.4783
+      },
+      {
+        "bucket": "2k\u20135k",
+        "lo": 2000,
+        "hi": 5000,
+        "n_windows": 48942,
+        "n_fraud": 72,
+        "aucpr_base": 0.8283,
+        "aucpr_enr": 0.9103,
+        "delta": 0.0819
+      },
+      {
+        "bucket": "5k\u201310k",
+        "lo": 5000,
+        "hi": 10000,
+        "n_windows": 289003,
+        "n_fraud": 611,
+        "aucpr_base": 0.7957,
+        "aucpr_enr": 0.8641,
+        "delta": 0.0684
+      },
+      {
+        "bucket": "10k+",
+        "lo": 10000,
+        "hi": 100000,
+        "n_windows": 1483168,
+        "n_fraud": 1598,
+        "aucpr_base": 0.7439,
+        "aucpr_enr": 0.7948,
+        "delta": 0.0508
+      }
+    ],
+    "merged_buckets": [
+      {
+        "bucket": "early (<5k)",
+        "lo": 16,
+        "hi": 5000,
+        "n_windows": 55670,
+        "n_fraud": 74,
+        "aucpr_base": 0.8067,
+        "aucpr_enr": 0.9119,
+        "delta": 0.1052
+      },
+      {
+        "bucket": "mid (5k\u201315k)",
+        "lo": 5000,
+        "hi": 15000,
+        "n_windows": 727371,
+        "n_fraud": 1294,
+        "aucpr_base": 0.7622,
+        "aucpr_enr": 0.8385,
+        "delta": 0.0763
+      },
+      {
+        "bucket": "late (15k+)",
+        "lo": 15000,
+        "hi": 100000,
+        "n_windows": 1044800,
+        "n_fraud": 915,
+        "aucpr_base": 0.7541,
+        "aucpr_enr": 0.7805,
+        "delta": 0.0264
+      }
+    ],
+    "quartile_buckets": [
+      {
+        "bucket": "Q1 (<11377)",
+        "lo": 0,
+        "hi": 11377,
+        "n_windows": 456952,
+        "n_fraud": 847,
+        "aucpr_base": 0.7971,
+        "aucpr_enr": 0.8567,
+        "delta": 0.0596
+      },
+      {
+        "bucket": "Q2 (11377\u201316796)",
+        "lo": 11377,
+        "hi": 16796,
+        "n_windows": 456906,
+        "n_fraud": 675,
+        "aucpr_base": 0.736,
+        "aucpr_enr": 0.8186,
+        "delta": 0.0825
+      },
+      {
+        "bucket": "Q3 (16796\u201324461)",
+        "lo": 16796,
+        "hi": 24461,
+        "n_windows": 457019,
+        "n_fraud": 419,
+        "aucpr_base": 0.7757,
+        "aucpr_enr": 0.7925,
+        "delta": 0.0168
+      },
+      {
+        "bucket": "Q4 (>24461)",
+        "lo": 24461,
+        "hi": 100000,
+        "n_windows": 456964,
+        "n_fraud": 342,
+        "aucpr_base": 0.695,
+        "aucpr_enr": 0.7427,
+        "delta": 0.0477
+      }
+    ],
+    "uniformity": "mixed"
+  },
+  "part2_spearman_correlations": {
+    "user_tx_count": {
+      "spearman_rho": 1.0,
+      "p_value": 0.0,
+      "interpretation": "STRONG proxy for position"
+    },
+    "merchant_user_count": {
+      "spearman_rho": 0.437,
+      "p_value": 0.0,
+      "interpretation": "moderate correlation"
+    },
+    "mcc_user_count": {
+      "spearman_rho": 0.5132,
+      "p_value": 0.0,
+      "interpretation": "moderate correlation"
+    },
+    "is_new_merchant": {
+      "spearman_rho": -0.0355,
+      "p_value": 1.0694e-56,
+      "interpretation": "negligible"
+    },
+    "first_mcc": {
+      "spearman_rho": -0.0193,
+      "p_value": 6.1704e-18,
+      "interpretation": "negligible"
+    },
+    "first_city_state": {
+      "spearman_rho": -0.029,
+      "p_value": 1.486e-38,
+      "interpretation": "negligible"
+    },
+    "is_largest_ever": {
+      "spearman_rho": -0.0091,
+      "p_value": 5.0405e-05,
+      "interpretation": "negligible"
+    },
+    "is_2x_hist_max": {
+      "spearman_rho": -0.0041,
+      "p_value": 0.06532,
+      "interpretation": "negligible"
+    },
+    "user_amount_zscore": {
+      "spearman_rho": 0.0013,
+      "p_value": 0.55744,
+      "interpretation": "negligible"
+    },
+    "user_hist_std": {
+      "spearman_rho": -0.1843,
+      "p_value": 0.0,
+      "interpretation": "weak correlation"
+    },
+    "score_advantage": {
+      "spearman_rho": 0.0125,
+      "p_value": 2.3378e-08,
+      "note": "prob_enriched \u2212 prob_baseline vs transaction position"
+    }
+  },
+  "part3_rare_purchase_position": {
+    "position_distribution": {
+      "rare_legit": {
+        "count": 55736,
+        "mean": 17717.8,
+        "p10": 7141.0,
+        "p25": 10403.0,
+        "p50": 15534.0,
+        "p75": 22467.0,
+        "p90": 29981.0
+      },
+      "ordinary_legit": {
+        "count": 1769822,
+        "mean": 19695.8,
+        "p10": 7824.0,
+        "p25": 11412.0,
+        "p50": 16841.0,
+        "p75": 24541.0,
+        "p90": 33647.0
+      },
+      "all_legit": {
+        "count": 1825558,
+        "mean": 19635.4,
+        "p10": 7799.0,
+        "p25": 11380.0,
+        "p50": 16802.0,
+        "p75": 24466.0,
+        "p90": 33550.0
+      }
+    },
+    "sub_slices": {
+      "amount_unusual": {
+        "count": 40080,
+        "mean": 18361.1,
+        "p50": 16152.0
+      },
+      "new_mcc": {
+        "count": 1233,
+        "mean": 10572.5,
+        "p50": 8932.0
+      },
+      "new_location": {
+        "count": 18548,
+        "mean": 16148.4,
+        "p50": 14024.0
+      }
+    },
+    "skew_ratio": 0.902,
+    "skew_verdict": "no_significant_skew",
+    "rare_fp_by_position": {
+      "early (<5k)": {
+        "n_rare_legit": 2505,
+        "fp_baseline": 3,
+        "fp_rate_baseline": 0.001198,
+        "fp_enriched": 5,
+        "fp_rate_enriched": 0.001996,
+        "relative_change_pct": 66.7
+      },
+      "mid (5k\u201315k)": {
+        "n_rare_legit": 24202,
+        "fp_baseline": 97,
+        "fp_rate_baseline": 0.004008,
+        "fp_enriched": 62,
+        "fp_rate_enriched": 0.002562,
+        "relative_change_pct": -36.1
+      },
+      "late (15k+)": {
+        "n_rare_legit": 29029,
+        "fp_baseline": 102,
+        "fp_rate_baseline": 0.003514,
+        "fp_enriched": 71,
+        "fp_rate_enriched": 0.002446,
+        "relative_change_pct": -30.4
+      }
+    }
+  },
+  "synthesis": {
+    "evidence_for_confound": [
+      "Features ['mcc_user_count'] are strong position proxies (|\u03c1|>0.5)"
+    ],
+    "evidence_against_confound": [
+      "AUC-PR improvement shows some variation but not extreme concentration",
+      "Score advantage is position-independent (\u03c1=+0.0125)",
+      "Rare-legit slice has similar position distribution to overall"
+    ],
+    "verdict": "UNLIKELY to be primarily position-driven."
+  }
+}

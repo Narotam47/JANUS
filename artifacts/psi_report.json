@@ -1,0 +1,2280 @@
+{
+  "description": "PSI drift report: training distribution (reference, sampled) vs. held-out test distribution (monitoring proxy).",
+  "honest_context": "The monitoring set is a chronological held-out slice of the SAME TabFormer dataset (last 20% of each user's transactions), not independent live traffic. PSI here reflects within-dataset temporal shift, not real-world drift. In production the reference would be a rolling training window and the monitoring window would be genuinely live, unseen transactions.",
+  "config": {
+    "n_bins": 10,
+    "epsilon": 0.0001,
+    "reference_sample_size": 300000,
+    "monitoring_sample_size": 1827841,
+    "watch_threshold": 0.1,
+    "retrain_threshold": 0.25,
+    "pct_features_watch_threshold": 0.2,
+    "seed": 42
+  },
+  "summary": {
+    "n_features": 243,
+    "n_stable": 212,
+    "n_watch": 1,
+    "n_retrain": 30
+  },
+  "top_10_drifted": [
+    {
+      "feature": "pop_7d_avg_count",
+      "psi": 5.839858,
+      "category": "retrain",
+      "feature_type": "continuous"
+    },
+    {
+      "feature": "pop_prior_day_count",
+      "psi": 3.745365,
+      "category": "retrain",
+      "feature_type": "continuous"
+    },
+    {
+      "feature": "user_tx_count",
+      "psi": 1.772409,
+      "category": "retrain",
+      "feature_type": "continuous"
+    },
+    {
+      "feature": "merch_days_active",
+      "psi": 1.588179,
+      "category": "retrain",
+      "feature_type": "continuous"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t3",
+      "psi": 1.477272,
+      "category": "retrain",
+      "feature_type": "binary"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t8",
+      "psi": 1.474546,
+      "category": "retrain",
+      "feature_type": "binary"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t2",
+      "psi": 1.472482,
+      "category": "retrain",
+      "feature_type": "binary"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t7",
+      "psi": 1.471893,
+      "category": "retrain",
+      "feature_type": "binary"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t4",
+      "psi": 1.471276,
+      "category": "retrain",
+      "feature_type": "binary"
+    },
+    {
+      "feature": "chip_Swipe Transaction_t1",
+      "psi": 1.47074,
+      "category": "retrain",
+      "feature_type": "binary"
+    }
+  ],
+  "should_retrain": {
+    "decision": true,
+    "reason": "Feature 'pop_7d_avg_count' has PSI=5.8399, at or above the single-feature retrain threshold (0.25).",
+    "thresholds_used": {
+      "single_feature_threshold": 0.25,
+      "pct_features_threshold": 0.2,
+      "watch_threshold": 0.1
+    }
+  },
+  "per_feature": [
+    {
+      "psi": 5.839858,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "pop_7d_avg_count"
+    },
+    {
+      "psi": 3.745365,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "pop_prior_day_count"
+    },
+    {
+      "psi": 1.772409,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_tx_count"
+    },
+    {
+      "psi": 1.588179,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "merch_days_active"
+    },
+    {
+      "psi": 1.477272,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t3"
+    },
+    {
+      "psi": 1.474546,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t8"
+    },
+    {
+      "psi": 1.472482,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t2"
+    },
+    {
+      "psi": 1.471893,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t7"
+    },
+    {
+      "psi": 1.471276,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t4"
+    },
+    {
+      "psi": 1.47074,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t1"
+    },
+    {
+      "psi": 1.469002,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t0"
+    },
+    {
+      "psi": 1.468842,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t9"
+    },
+    {
+      "psi": 1.467509,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t5"
+    },
+    {
+      "psi": 1.465333,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Swipe Transaction_t6"
+    },
+    {
+      "psi": 1.45605,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t1"
+    },
+    {
+      "psi": 1.454682,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t2"
+    },
+    {
+      "psi": 1.452237,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t8"
+    },
+    {
+      "psi": 1.451508,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t3"
+    },
+    {
+      "psi": 1.451452,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t9"
+    },
+    {
+      "psi": 1.451339,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t0"
+    },
+    {
+      "psi": 1.450672,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t7"
+    },
+    {
+      "psi": 1.449658,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t4"
+    },
+    {
+      "psi": 1.446741,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t5"
+    },
+    {
+      "psi": 1.445789,
+      "category": "retrain",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Chip Transaction_t6"
+    },
+    {
+      "psi": 1.311568,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 11,
+      "ref_nan_rate": 0.045687,
+      "mon_nan_rate": 0.040006,
+      "feature": "merch_spike_ratio"
+    },
+    {
+      "psi": 0.409763,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "mcc_user_count"
+    },
+    {
+      "psi": 0.32226,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "merch_tx_count"
+    },
+    {
+      "psi": 0.303806,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "merchant_user_count"
+    },
+    {
+      "psi": 0.255599,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 11,
+      "ref_nan_rate": 0.0795,
+      "mon_nan_rate": 0.00325,
+      "feature": "same_month_last_year_mean"
+    },
+    {
+      "psi": 0.250044,
+      "category": "retrain",
+      "feature_type": "continuous",
+      "n_bins_used": 11,
+      "ref_nan_rate": 0.0795,
+      "mon_nan_rate": 0.00325,
+      "feature": "amount_vs_last_year_ratio"
+    },
+    {
+      "psi": 0.193312,
+      "category": "watch",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_hist_max"
+    },
+    {
+      "psi": 0.075599,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 7,
+      "ref_nan_rate": 0.006723,
+      "mon_nan_rate": 0.002932,
+      "feature": "merch_large_tx_rate"
+    },
+    {
+      "psi": 0.050409,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "merch_7d_count"
+    },
+    {
+      "psi": 0.037883,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_amount_to_max_ratio"
+    },
+    {
+      "psi": 0.031464,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 11,
+      "ref_nan_rate": 0.006723,
+      "mon_nan_rate": 0.002932,
+      "feature": "merch_hist_amount_mean"
+    },
+    {
+      "psi": 0.010777,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "first_mcc"
+    },
+    {
+      "psi": 0.01074,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t9"
+    },
+    {
+      "psi": 0.010656,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t8"
+    },
+    {
+      "psi": 0.010569,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t7"
+    },
+    {
+      "psi": 0.010447,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t6"
+    },
+    {
+      "psi": 0.010425,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t5"
+    },
+    {
+      "psi": 0.010337,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t4"
+    },
+    {
+      "psi": 0.010307,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t3"
+    },
+    {
+      "psi": 0.010231,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t2"
+    },
+    {
+      "psi": 0.010152,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t1"
+    },
+    {
+      "psi": 0.010065,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "month_t0"
+    },
+    {
+      "psi": 0.009252,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_hist_std"
+    },
+    {
+      "psi": 0.0084,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_hist_mean"
+    },
+    {
+      "psi": 0.008161,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_year"
+    },
+    {
+      "psi": 0.00745,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_new_merchant"
+    },
+    {
+      "psi": 0.005388,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 11,
+      "ref_nan_rate": 0.009263,
+      "mon_nan_rate": 0.00411,
+      "feature": "merch_amount_deviation"
+    },
+    {
+      "psi": 0.002003,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t5"
+    },
+    {
+      "psi": 0.00186,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t2"
+    },
+    {
+      "psi": 0.001807,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t0"
+    },
+    {
+      "psi": 0.001777,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t6"
+    },
+    {
+      "psi": 0.001774,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t9"
+    },
+    {
+      "psi": 0.001774,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "days_since_last_tx"
+    },
+    {
+      "psi": 0.00172,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t1"
+    },
+    {
+      "psi": 0.001707,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t4"
+    },
+    {
+      "psi": 0.00169,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t8"
+    },
+    {
+      "psi": 0.001605,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t7"
+    },
+    {
+      "psi": 0.001568,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_holiday_season"
+    },
+    {
+      "psi": 0.001406,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hours_since_last_t3"
+    },
+    {
+      "psi": 0.001358,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t3"
+    },
+    {
+      "psi": 0.001311,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t3"
+    },
+    {
+      "psi": 0.001222,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "first_city_state"
+    },
+    {
+      "psi": 0.001215,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t8"
+    },
+    {
+      "psi": 0.001196,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t8"
+    },
+    {
+      "psi": 0.001187,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t6"
+    },
+    {
+      "psi": 0.001187,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t6"
+    },
+    {
+      "psi": 0.00117,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t4"
+    },
+    {
+      "psi": 0.001169,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t4"
+    },
+    {
+      "psi": 0.00116,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t7"
+    },
+    {
+      "psi": 0.001136,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t7"
+    },
+    {
+      "psi": 0.001131,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t3"
+    },
+    {
+      "psi": 0.001127,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t8"
+    },
+    {
+      "psi": 0.001112,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t5"
+    },
+    {
+      "psi": 0.001094,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t5"
+    },
+    {
+      "psi": 0.001078,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t4"
+    },
+    {
+      "psi": 0.001064,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t2"
+    },
+    {
+      "psi": 0.001063,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t2"
+    },
+    {
+      "psi": 0.001057,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t2"
+    },
+    {
+      "psi": 0.001057,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t6"
+    },
+    {
+      "psi": 0.001049,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t6"
+    },
+    {
+      "psi": 0.001034,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t0"
+    },
+    {
+      "psi": 0.00103,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t0"
+    },
+    {
+      "psi": 0.001018,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t9"
+    },
+    {
+      "psi": 0.001007,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t5"
+    },
+    {
+      "psi": 0.001007,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t5"
+    },
+    {
+      "psi": 0.001006,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t4"
+    },
+    {
+      "psi": 0.001006,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t4"
+    },
+    {
+      "psi": 0.001003,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t1"
+    },
+    {
+      "psi": 0.000999,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t9"
+    },
+    {
+      "psi": 0.000962,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t5"
+    },
+    {
+      "psi": 0.00096,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t7"
+    },
+    {
+      "psi": 0.00096,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t7"
+    },
+    {
+      "psi": 0.00096,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "chip_Online Transaction_t1"
+    },
+    {
+      "psi": 0.000958,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant State_t1"
+    },
+    {
+      "psi": 0.000956,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t7"
+    },
+    {
+      "psi": 0.000947,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t8"
+    },
+    {
+      "psi": 0.000947,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t8"
+    },
+    {
+      "psi": 0.000931,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t9"
+    },
+    {
+      "psi": 0.000912,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t1"
+    },
+    {
+      "psi": 0.000912,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t1"
+    },
+    {
+      "psi": 0.00091,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t0"
+    },
+    {
+      "psi": 0.000905,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t3"
+    },
+    {
+      "psi": 0.000905,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t3"
+    },
+    {
+      "psi": 0.0009,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Zip_t6"
+    },
+    {
+      "psi": 0.000892,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t0"
+    },
+    {
+      "psi": 0.000892,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t0"
+    },
+    {
+      "psi": 0.000868,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t8"
+    },
+    {
+      "psi": 0.000864,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t3"
+    },
+    {
+      "psi": 0.000862,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t2"
+    },
+    {
+      "psi": 0.000862,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t2"
+    },
+    {
+      "psi": 0.000844,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "user_amount_zscore"
+    },
+    {
+      "psi": 0.000833,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_raw_t9"
+    },
+    {
+      "psi": 0.000833,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "amount_log_t9"
+    },
+    {
+      "psi": 0.000792,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t4"
+    },
+    {
+      "psi": 0.000792,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t5"
+    },
+    {
+      "psi": 0.000792,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t7"
+    },
+    {
+      "psi": 0.000783,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t3"
+    },
+    {
+      "psi": 0.000781,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t2"
+    },
+    {
+      "psi": 0.000764,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t1"
+    },
+    {
+      "psi": 0.000752,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t9"
+    },
+    {
+      "psi": 0.000749,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t6"
+    },
+    {
+      "psi": 0.000744,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t7"
+    },
+    {
+      "psi": 0.000721,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t6"
+    },
+    {
+      "psi": 0.000705,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t2"
+    },
+    {
+      "psi": 0.000701,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_largest_ever"
+    },
+    {
+      "psi": 0.000693,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 9,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant City_t0"
+    },
+    {
+      "psi": 0.000689,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t7"
+    },
+    {
+      "psi": 0.000677,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t1"
+    },
+    {
+      "psi": 0.000674,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t5"
+    },
+    {
+      "psi": 0.000665,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t9"
+    },
+    {
+      "psi": 0.000664,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t8"
+    },
+    {
+      "psi": 0.000619,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t6"
+    },
+    {
+      "psi": 0.000588,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t4"
+    },
+    {
+      "psi": 0.000586,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t9"
+    },
+    {
+      "psi": 0.00058,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t8"
+    },
+    {
+      "psi": 0.000579,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t5"
+    },
+    {
+      "psi": 0.000561,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t4"
+    },
+    {
+      "psi": 0.00056,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t1"
+    },
+    {
+      "psi": 0.000551,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "Merchant Name_t0"
+    },
+    {
+      "psi": 0.000548,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t3"
+    },
+    {
+      "psi": 0.000546,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t2"
+    },
+    {
+      "psi": 0.000515,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 6,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "day_of_week_t0"
+    },
+    {
+      "psi": 0.000353,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t3"
+    },
+    {
+      "psi": 0.000351,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t1"
+    },
+    {
+      "psi": 0.000335,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t4"
+    },
+    {
+      "psi": 0.000323,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t9"
+    },
+    {
+      "psi": 0.000301,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t7"
+    },
+    {
+      "psi": 0.000265,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t6"
+    },
+    {
+      "psi": 0.000254,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t2"
+    },
+    {
+      "psi": 0.000232,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t0"
+    },
+    {
+      "psi": 0.00023,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t8"
+    },
+    {
+      "psi": 0.000205,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "MCC_t5"
+    },
+    {
+      "psi": 0.000193,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_dormant"
+    },
+    {
+      "psi": 0.000126,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_weekend"
+    },
+    {
+      "psi": 7.6e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t5"
+    },
+    {
+      "psi": 7.4e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t4"
+    },
+    {
+      "psi": 7.3e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t9"
+    },
+    {
+      "psi": 6.3e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t8"
+    },
+    {
+      "psi": 6.2e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t2"
+    },
+    {
+      "psi": 5.9e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t2"
+    },
+    {
+      "psi": 5.4e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t3"
+    },
+    {
+      "psi": 4.9e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t0"
+    },
+    {
+      "psi": 4.9e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t7"
+    },
+    {
+      "psi": 4e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t3"
+    },
+    {
+      "psi": 3.8e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t1"
+    },
+    {
+      "psi": 3.5e-05,
+      "category": "stable",
+      "feature_type": "continuous",
+      "n_bins_used": 10,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "hour_t6"
+    },
+    {
+      "psi": 3.4e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "first_tx_this_month"
+    },
+    {
+      "psi": 3.3e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t1"
+    },
+    {
+      "psi": 3.1e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t0"
+    },
+    {
+      "psi": 2.9e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t7"
+    },
+    {
+      "psi": 2.8e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t9"
+    },
+    {
+      "psi": 2.5e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t0"
+    },
+    {
+      "psi": 2.5e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t5"
+    },
+    {
+      "psi": 2.1e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t6"
+    },
+    {
+      "psi": 2.1e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "first_tx_this_year"
+    },
+    {
+      "psi": 1.9e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t1"
+    },
+    {
+      "psi": 1.9e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t6"
+    },
+    {
+      "psi": 1.8e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t3"
+    },
+    {
+      "psi": 1.8e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t0"
+    },
+    {
+      "psi": 1.7e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t4"
+    },
+    {
+      "psi": 1.6e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "first_channel"
+    },
+    {
+      "psi": 1.5e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t5"
+    },
+    {
+      "psi": 1.3e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t6"
+    },
+    {
+      "psi": 1.2e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t7"
+    },
+    {
+      "psi": 1.2e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t7"
+    },
+    {
+      "psi": 1.2e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t6"
+    },
+    {
+      "psi": 1.1e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t3"
+    },
+    {
+      "psi": 1e-05,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t1"
+    },
+    {
+      "psi": 9e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t5"
+    },
+    {
+      "psi": 9e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t4"
+    },
+    {
+      "psi": 8e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t8"
+    },
+    {
+      "psi": 6e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t2"
+    },
+    {
+      "psi": 6e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t2"
+    },
+    {
+      "psi": 6e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t4"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t1"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t3"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t7"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t9"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t8"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t5"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t6"
+    },
+    {
+      "psi": 5e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t7"
+    },
+    {
+      "psi": 4e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t9"
+    },
+    {
+      "psi": 4e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t8"
+    },
+    {
+      "psi": 4e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t9"
+    },
+    {
+      "psi": 4e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t3"
+    },
+    {
+      "psi": 4e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t4"
+    },
+    {
+      "psi": 3e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t8"
+    },
+    {
+      "psi": 3e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t0"
+    },
+    {
+      "psi": 3e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t0"
+    },
+    {
+      "psi": 2e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t0"
+    },
+    {
+      "psi": 2e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_cvv_t4"
+    },
+    {
+      "psi": 2e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_expiration_t5"
+    },
+    {
+      "psi": 2e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t5"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t1"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t2"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_insufficient_balance_t2"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t1"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t2"
+    },
+    {
+      "psi": 1e-06,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t9"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t4"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t6"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_card_number_t8"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t3"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t7"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_pin_t9"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t0"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t1"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t2"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t3"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t4"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t5"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t6"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t7"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t8"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_bad_zipcode_t9"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "err_technical_glitch_t8"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_2x_hist_max"
+    },
+    {
+      "psi": 0.0,
+      "category": "stable",
+      "feature_type": "binary",
+      "n_bins_used": 2,
+      "ref_nan_rate": 0.0,
+      "mon_nan_rate": 0.0,
+      "feature": "is_5x_hist_max"
+    }
+  ]
+}

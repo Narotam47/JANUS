@@ -1,0 +1,46 @@
+{
+  "description": "GraphSAGE edge classifier for transaction fraud, trained on the step 23 heterogeneous user-merchant-card graph.",
+  "honest_context": {
+    "leakage_fix": "Node features fraud_count/fraud_rate (saved in step 23's graph files, aggregated from within-split labels including each edge's own label) were EXCLUDED from the GNN's input at load time in this script \u2014 feeding them in would leak the prediction target through node aggregation.",
+    "training_sampling": "Each epoch trains on all 9,220 positive edges plus a fresh random 20x negative subsample (re-drawn per epoch) \u2014 not the full 7.3M train edges, which is intractable on CPU in this session. Evaluation uses the FULL, un-subsampled test set.",
+    "ring_structure_context": "Step 23 found weak-to-notable but minority evidence of merchant-level fraud clustering beyond popularity (16.3% train / 30.0% test of fraud-touched merchants). A GraphSAGE result close to or below the tabular model is consistent with that finding, not a sign of a broken model.",
+    "underperformance_attribution": "Two distinct, un-disentangled factors plausibly explain the large gap: (1) sparse node features \u2014 this run's nodes carry only 2-3 raw aggregate stats each vs. the tabular model's 243 features; the task's brief called for richer 'existing enriched feature vectors' than step 23's graph actually stored, and a richer variant was not attempted post-hoc to avoid tuning toward a win; (2) weak ring structure per step 23's own measurement, a real but likely smaller factor. This result does not cleanly isolate which explanation dominates."
+  },
+  "model_config": {
+    "hidden_channels": 64,
+    "num_layers": 2,
+    "num_neighbors": [
+      15,
+      10
+    ],
+    "n_epochs": 6,
+    "train_batch_size": 512,
+    "eval_batch_size": 8192,
+    "neg_sample_ratio_per_epoch": 20,
+    "learning_rate": 0.001,
+    "pos_weight": 794.75
+  },
+  "training": {
+    "epoch_losses": [
+      3.706715,
+      3.034618,
+      2.927158,
+      2.781203,
+      2.76137,
+      2.719953
+    ],
+    "train_time_seconds": 35.33,
+    "eval_time_seconds": 2.66,
+    "total_runtime_seconds": 39.92,
+    "peak_memory_mb": 123.11
+  },
+  "results": {
+    "gnn_auc_pr": 0.026443,
+    "enriched_xgboost_auc_pr": 0.817069,
+    "delta": -0.790626,
+    "verdict": "underperforms"
+  },
+  "outputs": {
+    "model": "artifacts/model_gnn.pt"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "description": "Adaptive robustness check: a fresh PPO attacker, trained from scratch (no warm-start from ppo_policy.zip), against model_hardened.json.",
+  "honest_context": "Step 21's transfer test (reusing the original policy) only shows the SPECIFIC trajectories the original attacker learned no longer work. This script answers the stronger question: can a brand-new attacker, searching from scratch with the SAME environment design, find a DIFFERENT way to evade the hardened model?",
+  "environment": {
+    "same_as_step20": true,
+    "perturbable_continuous": [
+      "amount_raw_t9",
+      "amount_log_t9",
+      "hours_since_last_t9",
+      "hour_t9",
+      "day_of_week_t9",
+      "user_amount_zscore",
+      "user_amount_to_max_ratio",
+      "days_since_last_tx"
+    ],
+    "perturbable_binary": [
+      "first_city_state",
+      "first_channel"
+    ],
+    "budget_std_units": 6.0,
+    "max_steps_per_episode": 15,
+    "total_timesteps": 100000,
+    "seed": 4242,
+    "loaded_original_policy": false
+  },
+  "training": {
+    "train_time_seconds": 41.44,
+    "n_episodes": 9110,
+    "before_training_evasion_rate": 0.04547630445189086,
+    "reward_first_quartile_mean": 1.6988665153069855,
+    "reward_last_quartile_mean": 2.5366656585412066
+  },
+  "comparison_table": {
+    "original_attacker_vs_original_model": {
+      "n_catchable": 1645,
+      "evasion_rate_deterministic": 0.5884498480243161,
+      "evasion_rate_harvest": 0.6656534954407295,
+      "n_evaders_harvested": 1095
+    },
+    "original_attacker_vs_hardened_model": {
+      "n_catchable": 2089,
+      "evasion_rate_deterministic": 0.004786979415988511,
+      "evasion_rate_harvest": 0.018190521780756343,
+      "n_evaders_harvested": 38
+    },
+    "fresh_attacker_vs_hardened_model": {
+      "n_catchable": 2089,
+      "evasion_rate_deterministic": 0.48635710866443277,
+      "evasion_rate_harvest": 0.6491144088080422
+    }
+  },
+  "feature_targeting_comparison": {
+    "original_attacker_ranking": {
+      "amount_raw_t9": 0.5123597979545593,
+      "amount_log_t9": 0.5562236309051514,
+      "hours_since_last_t9": 1.2839616537094116,
+      "hour_t9": 1.7811143398284912,
+      "day_of_week_t9": 1.5366311073303223,
+      "user_amount_zscore": 0.7028324604034424,
+      "user_amount_to_max_ratio": 0.9469696879386902,
+      "days_since_last_tx": 0.6407113075256348
+    },
+    "fresh_attacker_ranking": {
+      "hour_t9": "2.8363879",
+      "hours_since_last_t9": "1.318258",
+      "days_since_last_tx": "1.2108047",
+      "amount_raw_t9": "1.0281295",
+      "amount_log_t9": "0.9234177",
+      "day_of_week_t9": "0.91878724",
+      "user_amount_zscore": "0.7685699",
+      "user_amount_to_max_ratio": "0.6711273"
+    }
+  },
+  "fresh_attacker_evader_analysis": {
+    "n_evaders": 1356,
+    "mean_prob_drop": 0.04810083316842363,
+    "mean_abs_perturbation_per_feature_std_units": {
+      "hour_t9": 2.836387872695923,
+      "hours_since_last_t9": 1.3182580471038818,
+      "days_since_last_tx": 1.2108047008514404,
+      "amount_raw_t9": 1.0281294584274292,
+      "amount_log_t9": 0.9234176874160767,
+      "day_of_week_t9": 0.9187872409820557,
+      "user_amount_zscore": 0.7685698866844177,
+      "user_amount_to_max_ratio": 0.6711273193359375
+    },
+    "n_binary_flips_total": 205
+  },
+  "verdict": "overfit",
+  "outputs": {
+    "policy": "artifacts/ppo_policy_adaptive.zip"
+  },
+  "runtime_seconds": 77.55
+}

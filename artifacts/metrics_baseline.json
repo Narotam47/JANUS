@@ -1,0 +1,110 @@
+{
+  "model": "XGBoost baseline",
+  "phase": "Phase 0 \u2014 baseline defender",
+  "data": {
+    "train_windows": 7330071,
+    "train_positives": 9220,
+    "train_positive_rate": 0.001258,
+    "test_windows": 1827841,
+    "test_positives": 2283,
+    "test_positive_rate": 0.001249,
+    "features_per_window": 210,
+    "scale_pos_weight": 794.0
+  },
+  "headline_metrics": {
+    "AUC_PR": 0.755584,
+    "ROC_AUC": 0.998718,
+    "note": "AUC-PR is the primary metric. At 0.12% base rate, ROC-AUC is inflated by the trivially high TNR."
+  },
+  "best_f1_threshold": {
+    "best_threshold": 0.9592928290367126,
+    "best_f1": 0.6954314720812182,
+    "precision_at_best": 0.734763529985373,
+    "recall_at_best": 0.6600963644327639,
+    "n_thresholds_swept": 1692628
+  },
+  "at_default_threshold_0.5": {
+    "f1": 0.242231,
+    "precision": 0.138472,
+    "recall": 0.966272
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.10000065714120865,
+      "precision": 0.0347,
+      "recall": 0.9943,
+      "f1": 0.067
+    },
+    {
+      "threshold": 0.20001818239688873,
+      "precision": 0.0569,
+      "recall": 0.9908,
+      "f1": 0.1075
+    },
+    {
+      "threshold": 0.3000103533267975,
+      "precision": 0.0796,
+      "recall": 0.9838,
+      "f1": 0.1473
+    },
+    {
+      "threshold": 0.400014728307724,
+      "precision": 0.1063,
+      "recall": 0.9781,
+      "f1": 0.1918
+    },
+    {
+      "threshold": 0.5000024437904358,
+      "precision": 0.1385,
+      "recall": 0.9663,
+      "f1": 0.2422
+    },
+    {
+      "threshold": 0.6000993847846985,
+      "precision": 0.1806,
+      "recall": 0.9501,
+      "f1": 0.3035
+    },
+    {
+      "threshold": 0.7000359892845154,
+      "precision": 0.24,
+      "recall": 0.9299,
+      "f1": 0.3816
+    },
+    {
+      "threshold": 0.8000115752220154,
+      "precision": 0.3372,
+      "recall": 0.9019,
+      "f1": 0.4909
+    },
+    {
+      "threshold": 0.900002658367157,
+      "precision": 0.5194,
+      "recall": 0.8226,
+      "f1": 0.6367
+    }
+  ],
+  "latency_cpu_single_window": {
+    "n_runs": 1000,
+    "mean_ms": 0.28,
+    "median_ms": 0.2721,
+    "p95_ms": 0.3566,
+    "p99_ms": 0.4216,
+    "min_ms": 0.2255,
+    "max_ms": 0.959
+  },
+  "training": {
+    "time_seconds": 160.6,
+    "xgb_params": {
+      "n_estimators": 300,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "tree_method": "hist",
+      "eval_metric": "aucpr",
+      "random_state": 42,
+      "n_jobs": -1,
+      "scale_pos_weight": 794.0
+    }
+  },
+  "peak_memory_mb": 168.6
+}

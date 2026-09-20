@@ -1,0 +1,233 @@
+{
+  "description": "Cold-start analysis for users with < 10 transaction history. The TabFormer synthetic dataset has zero fraud in the cold-start window (positions 0-8), so no supervised model can be trained.",
+  "can_train_model": false,
+  "model_file": null,
+  "routing_policy": {
+    "position_0": "step_up (zero history, zero personalized signal)",
+    "positions_1_to_8": "approve (0% fraud in synthetic data)",
+    "positions_9_plus": "main enriched model (step 8)"
+  },
+  "segments": {
+    "step_up": {
+      "train": {
+        "count": 750,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      },
+      "test": {
+        "count": 0,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      }
+    },
+    "cold_start": {
+      "train": {
+        "count": 6000,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      },
+      "test": {
+        "count": 0,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      }
+    },
+    "main_model": {
+      "train": {
+        "count": 7330071,
+        "fraud": 9220,
+        "fraud_rate": 0.001258
+      },
+      "test": {
+        "count": 1834571,
+        "fraud": 2287,
+        "fraud_rate": 0.001247
+      }
+    }
+  },
+  "fraud_distribution": {
+    "earliest_fraud_position": 68,
+    "median_fraud_position": 6332,
+    "by_bucket": {
+      "0-9": {
+        "count": 7500,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      },
+      "10-49": {
+        "count": 29654,
+        "fraud": 0,
+        "fraud_rate": 0.0
+      },
+      "50-99": {
+        "count": 34662,
+        "fraud": 22,
+        "fraud_rate": 0.000635
+      },
+      "100-199": {
+        "count": 64280,
+        "fraud": 31,
+        "fraud_rate": 0.000482
+      },
+      "200-499": {
+        "count": 182111,
+        "fraud": 149,
+        "fraud_rate": 0.000818
+      },
+      "500-999": {
+        "count": 300307,
+        "fraud": 352,
+        "fraud_rate": 0.001172
+      },
+      "1000-99999": {
+        "count": 6718307,
+        "fraud": 8666,
+        "fraud_rate": 0.00129
+      }
+    }
+  },
+  "novelty_flag_rates": {
+    "is_largest_ever": {
+      "coldstart_rate": 0.1678,
+      "main_model_rate": 0.0005,
+      "ratio": 313.0
+    },
+    "is_2x_hist_max": {
+      "coldstart_rate": 0.072,
+      "main_model_rate": 0.0001,
+      "ratio": 1032.8
+    },
+    "is_5x_hist_max": {
+      "coldstart_rate": 0.0283,
+      "main_model_rate": 0.0,
+      "ratio": 4418.8
+    },
+    "first_mcc": {
+      "coldstart_rate": 0.6353,
+      "main_model_rate": 0.0061,
+      "ratio": 104.1
+    },
+    "first_city_state": {
+      "coldstart_rate": 0.2903,
+      "main_model_rate": 0.0141,
+      "ratio": 20.6
+    },
+    "first_channel": {
+      "coldstart_rate": 0.0712,
+      "main_model_rate": 0.0001,
+      "ratio": 514.5
+    },
+    "is_dormant": {
+      "coldstart_rate": 0.1069,
+      "main_model_rate": 0.0263,
+      "ratio": 4.1
+    },
+    "first_tx_this_month": {
+      "coldstart_rate": 0.0493,
+      "main_model_rate": 0.011,
+      "ratio": 4.5
+    },
+    "first_tx_this_year": {
+      "coldstart_rate": 0.0128,
+      "main_model_rate": 0.0009,
+      "ratio": 13.9
+    }
+  },
+  "merchant_feature_comparison": {
+    "merch_tx_count": {
+      "coldstart": {
+        "mean": 33966.26,
+        "nan_pct": 0.0
+      },
+      "main_model": {
+        "mean": 45091.96,
+        "nan_pct": 0.0
+      }
+    },
+    "merch_7d_count": {
+      "coldstart": {
+        "mean": 85.62,
+        "nan_pct": 0.0
+      },
+      "main_model": {
+        "mean": 119.63,
+        "nan_pct": 0.0
+      }
+    },
+    "merch_spike_ratio": {
+      "coldstart": {
+        "mean": 3.11,
+        "nan_pct": 22.5
+      },
+      "main_model": {
+        "mean": 2.71,
+        "nan_pct": 4.5
+      }
+    },
+    "merch_days_active": {
+      "coldstart": {
+        "mean": 4409.89,
+        "nan_pct": 0.0
+      },
+      "main_model": {
+        "mean": 5463.78,
+        "nan_pct": 0.0
+      }
+    },
+    "merch_hist_amount_mean": {
+      "coldstart": {
+        "mean": 52.19,
+        "nan_pct": 14.0
+      },
+      "main_model": {
+        "mean": 43.79,
+        "nan_pct": 0.7
+      }
+    },
+    "merch_amount_deviation": {
+      "coldstart": {
+        "mean": 7705.34,
+        "nan_pct": 16.4
+      },
+      "main_model": {
+        "mean": 105.64,
+        "nan_pct": 0.9
+      }
+    },
+    "merch_large_tx_rate": {
+      "coldstart": {
+        "mean": 0.04,
+        "nan_pct": 14.0
+      },
+      "main_model": {
+        "mean": 0.03,
+        "nan_pct": 0.7
+      }
+    },
+    "pop_prior_day_count": {
+      "coldstart": {
+        "mean": 1092.78,
+        "nan_pct": 0.0
+      },
+      "main_model": {
+        "mean": 1398.58,
+        "nan_pct": 0.0
+      }
+    },
+    "pop_7d_avg_count": {
+      "coldstart": {
+        "mean": 1069.87,
+        "nan_pct": 0.0
+      },
+      "main_model": {
+        "mean": 1397.42,
+        "nan_pct": 0.0
+      }
+    }
+  },
+  "test_set": {
+    "min_user_tx_count": 16,
+    "cold_start_count": 0,
+    "note": "All test transactions have 16+ prior txs due to per-user chronological 80/20 split with all users having \u226516 total transactions."
+  }
+}

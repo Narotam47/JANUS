@@ -1,0 +1,143 @@
+{
+  "description": "Confidence score validation on the enriched model's test set.",
+  "threshold": 0.9496600031852722,
+  "component_weights": {
+    "certainty": 0.35,
+    "history": 0.15,
+    "familiarity": 0.2,
+    "novelty": 0.2,
+    "completeness": 0.1
+  },
+  "score_distribution": {
+    "mean": 0.989,
+    "p5": 0.9118,
+    "p25": 1.0,
+    "p50": 1.0,
+    "p75": 1.0,
+    "p95": 1.0
+  },
+  "validation_by_bucket": [
+    {
+      "bucket": "very low [0,.4)",
+      "lo": 0.0,
+      "hi": 0.4,
+      "n_windows": 9,
+      "n_fraud": 4,
+      "n_flagged": 4,
+      "tp": 2,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "fp_rate": 0.4
+    },
+    {
+      "bucket": "low [.4,.6)",
+      "lo": 0.4,
+      "hi": 0.6,
+      "n_windows": 979,
+      "n_fraud": 318,
+      "n_flagged": 183,
+      "tp": 98,
+      "fp": 85,
+      "fn": 220,
+      "precision": 0.5355,
+      "recall": 0.3082,
+      "f1": 0.3912,
+      "fp_rate": 0.128593
+    },
+    {
+      "bucket": "moderate [.6,.75)",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n_windows": 3335,
+      "n_fraud": 466,
+      "n_flagged": 483,
+      "tp": 322,
+      "fp": 161,
+      "fn": 144,
+      "precision": 0.6667,
+      "recall": 0.691,
+      "f1": 0.6786,
+      "fp_rate": 0.056117
+    },
+    {
+      "bucket": "high [.75,.9)",
+      "lo": 0.75,
+      "hi": 0.9,
+      "n_windows": 79057,
+      "n_fraud": 978,
+      "n_flagged": 957,
+      "tp": 812,
+      "fp": 145,
+      "fn": 166,
+      "precision": 0.8485,
+      "recall": 0.8303,
+      "f1": 0.8393,
+      "fp_rate": 0.001857
+    },
+    {
+      "bucket": "very high [.9,1]",
+      "lo": 0.9,
+      "hi": 1.01,
+      "n_windows": 1744461,
+      "n_fraud": 517,
+      "n_flagged": 467,
+      "tp": 411,
+      "fp": 56,
+      "fn": 106,
+      "precision": 0.8801,
+      "recall": 0.795,
+      "f1": 0.8354,
+      "fp_rate": 3.2e-05
+    }
+  ],
+  "monotonicity": "monotonic",
+  "first_mcc_check": {
+    "n_first_mcc_legit": 1233,
+    "confidence_mean": 0.7061,
+    "confidence_p25": 0.71,
+    "bucket_distribution": {
+      "very low [0,.4)": {
+        "count": 5,
+        "pct": 0.4
+      },
+      "low [.4,.6)": {
+        "count": 53,
+        "pct": 4.3
+      },
+      "moderate [.6,.75)": {
+        "count": 1175,
+        "pct": 95.3
+      },
+      "high [.75,.9)": {
+        "count": 0,
+        "pct": 0.0
+      },
+      "very high [.9,1]": {
+        "count": 0,
+        "pct": 0.0
+      }
+    },
+    "low_conf_pct": 4.7,
+    "verdict": "insufficient_coverage",
+    "fp_by_confidence": {
+      "very low [0,.4)": {
+        "n": 5,
+        "fp": 2,
+        "fp_rate": 0.4
+      },
+      "low [.4,.6)": {
+        "n": 53,
+        "fp": 11,
+        "fp_rate": 0.2075
+      },
+      "moderate [.6,.75)": {
+        "n": 1175,
+        "fp": 16,
+        "fp_rate": 0.0136
+      }
+    }
+  }
+}

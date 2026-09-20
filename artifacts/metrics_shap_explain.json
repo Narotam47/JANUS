@@ -1,0 +1,321 @@
+{
+  "description": "SHAP TreeExplainer validation and latency for the per-transaction explain() function. No model artifact.",
+  "latency_ms": {
+    "n_calls": 500,
+    "mean": 1.4652,
+    "median": 1.4449,
+    "p95": 1.5887,
+    "p99": 1.8216,
+    "min": 1.298,
+    "max": 3.0808,
+    "step8_bare_inference_mean": 0.2684,
+    "combined_p99": 2.09,
+    "authorization_budget_ms": 50.0,
+    "within_budget": true
+  },
+  "topk_frequency_validation": {
+    "sample_size": 1000,
+    "top_k": 3,
+    "batch_shap_time_seconds": 0.1793,
+    "frequency_table": [
+      {
+        "feature": "Zip_t9",
+        "count": 983,
+        "pct_of_transactions": 98.3
+      },
+      {
+        "feature": "merchant_user_count",
+        "count": 858,
+        "pct_of_transactions": 85.8
+      },
+      {
+        "feature": "mcc_user_count",
+        "count": 398,
+        "pct_of_transactions": 39.8
+      },
+      {
+        "feature": "pop_7d_avg_count",
+        "count": 271,
+        "pct_of_transactions": 27.1
+      },
+      {
+        "feature": "merch_days_active",
+        "count": 244,
+        "pct_of_transactions": 24.4
+      },
+      {
+        "feature": "MCC_t9",
+        "count": 88,
+        "pct_of_transactions": 8.8
+      },
+      {
+        "feature": "hour_t9",
+        "count": 82,
+        "pct_of_transactions": 8.2
+      },
+      {
+        "feature": "Merchant State_t9",
+        "count": 22,
+        "pct_of_transactions": 2.2
+      },
+      {
+        "feature": "Merchant City_t9",
+        "count": 16,
+        "pct_of_transactions": 1.6
+      },
+      {
+        "feature": "MCC_t8",
+        "count": 8,
+        "pct_of_transactions": 0.8
+      },
+      {
+        "feature": "merch_hist_amount_mean",
+        "count": 7,
+        "pct_of_transactions": 0.7
+      },
+      {
+        "feature": "Merchant Name_t9",
+        "count": 5,
+        "pct_of_transactions": 0.5
+      },
+      {
+        "feature": "hours_since_last_t9",
+        "count": 3,
+        "pct_of_transactions": 0.3
+      },
+      {
+        "feature": "merch_large_tx_rate",
+        "count": 3,
+        "pct_of_transactions": 0.3
+      },
+      {
+        "feature": "user_hist_max",
+        "count": 2,
+        "pct_of_transactions": 0.2
+      },
+      {
+        "feature": "merch_amount_deviation",
+        "count": 2,
+        "pct_of_transactions": 0.2
+      },
+      {
+        "feature": "first_city_state",
+        "count": 2,
+        "pct_of_transactions": 0.2
+      },
+      {
+        "feature": "Zip_t8",
+        "count": 2,
+        "pct_of_transactions": 0.2
+      },
+      {
+        "feature": "err_bad_pin_t9",
+        "count": 1,
+        "pct_of_transactions": 0.1
+      },
+      {
+        "feature": "MCC_t6",
+        "count": 1,
+        "pct_of_transactions": 0.1
+      },
+      {
+        "feature": "err_insufficient_balance_t8",
+        "count": 1,
+        "pct_of_transactions": 0.1
+      },
+      {
+        "feature": "MCC_t7",
+        "count": 1,
+        "pct_of_transactions": 0.1
+      }
+    ],
+    "crosscheck_vs_global_importance": [
+      {
+        "feature": "chip_Chip Transaction_t1",
+        "global_rank": 1,
+        "shap_top3_pct": 0.0
+      },
+      {
+        "feature": "merchant_user_count",
+        "global_rank": 2,
+        "shap_top3_pct": 85.8
+      },
+      {
+        "feature": "first_city_state",
+        "global_rank": 3,
+        "shap_top3_pct": 0.2
+      },
+      {
+        "feature": "merch_large_tx_rate",
+        "global_rank": 4,
+        "shap_top3_pct": 0.3
+      },
+      {
+        "feature": "merch_hist_amount_mean",
+        "global_rank": 5,
+        "shap_top3_pct": 0.7
+      },
+      {
+        "feature": "mcc_user_count",
+        "global_rank": 6,
+        "shap_top3_pct": 39.8
+      },
+      {
+        "feature": "hours_since_last_t2",
+        "global_rank": 7,
+        "shap_top3_pct": 0.0
+      },
+      {
+        "feature": "pop_7d_avg_count",
+        "global_rank": 8,
+        "shap_top3_pct": 27.1
+      },
+      {
+        "feature": "month_t1",
+        "global_rank": 9,
+        "shap_top3_pct": 0.0
+      },
+      {
+        "feature": "amount_vs_last_year_ratio",
+        "global_rank": 10,
+        "shap_top3_pct": 0.0
+      }
+    ],
+    "top5_globally_important_all_appear": false,
+    "dominant_feature_discrepancy": {
+      "dominant_feature": "Zip_t9",
+      "pct_of_transactions": 98.3,
+      "in_global_top30": false,
+      "most_correlated_raw_column": "Merchant City",
+      "correlation": 0.852,
+      "sentinel_value_note": "'Zip' takes a CONSTANT value (2.1061, std=0) whenever 'chip_Online Transaction'=1 (n=216,182) \u2014 consistent with a missing-value sentinel (e.g. no physical zip code for that transaction channel) rather than a real geographic reading. This subset alone covers 216,182 of 1,834,571 test transactions (11.8%), so it is a real but PARTIAL explanation \u2014 it does not by itself account for why 'Zip' dominates SHAP attribution for the much larger share of sampled transactions shown above.",
+      "note": "Gain-based importance aggregates/averages across all trees; when features are collinear (here, location/merchant-identity columns), reliance can split across them, diluting any single one's aggregate gain rank while per-instance SHAP still credits whichever correlated column a given transaction's trees actually used. This is a known limitation of aggregate gain importance rather than evidence of a bug."
+    }
+  },
+  "example_explanations": [
+    {
+      "true_label": "FRAUD",
+      "probability": 0.998122,
+      "confidence_score": 0.9171,
+      "confidence_reason": "unfamiliar merchant or category",
+      "top_features": [
+        {
+          "feature": "Zip_t9",
+          "shap_value": 3.539906,
+          "value": 0.920419
+        },
+        {
+          "feature": "merch_days_active",
+          "shap_value": 2.542733,
+          "value": 9083.330078
+        },
+        {
+          "feature": "pop_7d_avg_count",
+          "shap_value": -0.590567,
+          "value": 1788.428589
+        }
+      ],
+      "rationale": "Flagged primarily because the transaction's overall pattern (recent amounts, timing, and merchant activity) closely resembles historical fraud patterns, without any single unusual attribute standing out.",
+      "routing_verdict": {
+        "probability": 0.9981216788291931,
+        "confidence_score": 0.9171,
+        "confidence_reason": "unfamiliar merchant or category",
+        "decision": "block",
+        "rule": "high_prob_high_conf"
+      }
+    },
+    {
+      "true_label": "FRAUD",
+      "probability": 0.997256,
+      "confidence_score": 0.74,
+      "confidence_reason": "unfamiliar merchant or category",
+      "top_features": [
+        {
+          "feature": "Zip_t9",
+          "shap_value": 2.740609,
+          "value": 0.920419
+        },
+        {
+          "feature": "merchant_user_count",
+          "shap_value": 2.186932,
+          "value": 0.0
+        },
+        {
+          "feature": "mcc_user_count",
+          "shap_value": 1.093552,
+          "value": 0.0
+        }
+      ],
+      "rationale": "Flagged primarily because the user has never visited this merchant before, and the user has never transacted in this merchant category before.",
+      "routing_verdict": {
+        "probability": 0.9972564578056335,
+        "confidence_score": 0.74,
+        "confidence_reason": "unfamiliar merchant or category",
+        "decision": "step_up",
+        "rule": "low_confidence"
+      }
+    },
+    {
+      "true_label": "legit",
+      "probability": 3.4e-05,
+      "confidence_score": 1.0,
+      "confidence_reason": "all signals strong",
+      "top_features": [
+        {
+          "feature": "Zip_t9",
+          "shap_value": -2.484243,
+          "value": -1.652418
+        },
+        {
+          "feature": "merch_days_active",
+          "shap_value": -1.905273,
+          "value": 9739.508789
+        },
+        {
+          "feature": "pop_7d_avg_count",
+          "shap_value": -1.731759,
+          "value": 1790.571411
+        }
+      ],
+      "rationale": "Not flagged. Feature values are consistent with this user's established transaction pattern; no unusual merchant, amount, or location signals were detected.",
+      "routing_verdict": {
+        "probability": 3.358093454153277e-05,
+        "confidence_score": 1.0,
+        "confidence_reason": "all signals strong",
+        "decision": "approve",
+        "rule": "confident_approve"
+      }
+    },
+    {
+      "true_label": "legit",
+      "probability": 2e-06,
+      "confidence_score": 1.0,
+      "confidence_reason": "all signals strong",
+      "top_features": [
+        {
+          "feature": "Zip_t9",
+          "shap_value": -4.408934,
+          "value": 0.223115
+        },
+        {
+          "feature": "merchant_user_count",
+          "shap_value": -2.532345,
+          "value": 2876.0
+        },
+        {
+          "feature": "mcc_user_count",
+          "shap_value": -1.344545,
+          "value": 3195.0
+        }
+      ],
+      "rationale": "Not flagged. Feature values are consistent with this user's established transaction pattern; no unusual merchant, amount, or location signals were detected.",
+      "routing_verdict": {
+        "probability": 2.170749667129712e-06,
+        "confidence_score": 1.0,
+        "confidence_reason": "all signals strong",
+        "decision": "approve",
+        "rule": "confident_approve"
+      }
+    }
+  ]
+}

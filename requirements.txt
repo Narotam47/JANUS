@@ -1,0 +1,57 @@
+# JANUS — pinned to the environment that produced the committed results
+# (Python 3.12.13; versions read from that venv, not a full conda freeze).
+# Only packages the step*.py scripts import (or need at runtime) are listed.
+#
+# KNOWN VERSION MISMATCH: artifacts/scaler.pkl and artifacts/encoders.pkl were
+# created with scikit-learn 1.8.0 (pinned below). Unpickling them under another
+# sklearn version emits InconsistentVersionWarning and "might lead to breaking
+# code or invalid results". The .pkl files are NOT committed: re-run
+# step2_preprocess_data.py to regenerate them under your own sklearn version.
+#
+# ENVIRONMENT CAVEAT: step26_federated.py was actually run under a separate
+# Python 3.13.9 / xgboost 3.1.2 environment (flwr 1.36.0, ray 2.58.0 as below),
+# not this exact pin set. Its reported numbers were not re-run under xgboost 3.2.0.
+
+# --- Core data / modeling (steps 1-13, 17-18, 21, 28-29) ---
+numpy==2.4.6
+pandas==2.3.3
+pyarrow==24.0.0
+scipy==1.17.1
+scikit-learn==1.8.0
+xgboost==3.2.0
+shap==0.52.0
+matplotlib==3.10.9
+
+# --- Serving / streaming / dashboard (steps 14-16) ---
+fastapi==0.138.2
+pydantic==2.13.5
+uvicorn==0.49.0
+# httpx is not imported directly, but starlette's TestClient (used in step 15 to
+# call the FastAPI app in-process) requires it.
+httpx==0.28.1
+# redis client is a hard import in step15. A real redis-server on localhost:6379
+# is required at runtime (e.g. `brew services start redis`).
+redis==8.1.0
+# kafka-python is imported lazily/optionally in step15; with no broker on
+# localhost:9092 the code falls back to an in-process mock message bus.
+kafka-python==3.0.11
+streamlit==1.58.0
+altair==6.1.0
+
+# --- Adversarial / synthetic data (steps 19-21b) ---
+ctgan==0.12.1
+gymnasium==1.2.3
+stable-baselines3==2.8.0
+
+# --- Graph model (steps 23-25) ---
+torch==2.12.0
+torch-geometric==2.8.0.post1
+# pyg-lib is NOT on plain PyPI for this torch build; install it separately with
+# the matching wheel index (step24/25 use hetero neighbor sampling that needs it):
+#   pip install pyg-lib==0.9.0 -f https://data.pyg.org/whl/torch-2.12.0+cpu.html
+# (the venv used had pyg-lib 0.9.0+pt212)
+
+# --- Federated learning (step 26) ---
+flwr==1.36.0
+# ray is not imported directly; it is the backend of flwr's run_simulation().
+ray==2.58.0

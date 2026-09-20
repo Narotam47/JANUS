@@ -1,0 +1,78 @@
+{
+  "description": "User-merchant-card heterogeneous transaction graph for GraphSAGE (step 23). Train and test graphs built from disjoint transaction sets (same chronological per-user 80/20 split as the rest of the project).",
+  "schema": {
+    "node_types": [
+      "user",
+      "merchant",
+      "card"
+    ],
+    "edge_types": [
+      [
+        "user",
+        "owns",
+        "card"
+      ],
+      [
+        "user",
+        "transacts",
+        "merchant"
+      ],
+      [
+        "card",
+        "used_at",
+        "merchant"
+      ]
+    ],
+    "transacts_edge_attr_columns": [
+      "amount_log",
+      "hour_of_day",
+      "first_mcc",
+      "is_new_merchant",
+      "user_amount_zscore",
+      "days_since_last_tx"
+    ]
+  },
+  "train": {
+    "n_users": 750,
+    "n_merchants": 51297,
+    "n_cards": 2079,
+    "n_transacts_edges": 7336821,
+    "n_fraud_edges": 9220,
+    "fraud_edge_rate": 0.001257,
+    "bipartite_density": 0.19070175643799833,
+    "ring_structure_check": {
+      "merchants_with_fraud": 1264,
+      "max_distinct_fraud_users_at_one_merchant_raw": 295,
+      "merchants_with_multi_user_fraud_raw": 313,
+      "pct_fraud_merchants_multi_user_raw": 24.76,
+      "null_model": "expected distinct fraud users per merchant under i.i.d. base-rate fraud, scaled by each user's actual visit count at that merchant",
+      "mean_observed_over_expected_ratio": 360.016,
+      "median_observed_over_expected_ratio": 235.103,
+      "merchants_with_meaningful_excess": 206,
+      "pct_merchants_with_meaningful_excess": 16.3,
+      "verdict": "weak_evidence"
+    }
+  },
+  "test": {
+    "n_users": 750,
+    "n_merchants": 26201,
+    "n_cards": 2034,
+    "n_transacts_edges": 1834571,
+    "n_fraud_edges": 2287,
+    "fraud_edge_rate": 0.001247,
+    "bipartite_density": 0.09335882854343981,
+    "ring_structure_check": {
+      "merchants_with_fraud": 190,
+      "max_distinct_fraud_users_at_one_merchant_raw": 110,
+      "merchants_with_multi_user_fraud_raw": 112,
+      "pct_fraud_merchants_multi_user_raw": 58.95,
+      "null_model": "expected distinct fraud users per merchant under i.i.d. base-rate fraud, scaled by each user's actual visit count at that merchant",
+      "mean_observed_over_expected_ratio": 202.952,
+      "median_observed_over_expected_ratio": 9.311,
+      "merchants_with_meaningful_excess": 57,
+      "pct_merchants_with_meaningful_excess": 30.0,
+      "verdict": "notable_evidence"
+    }
+  },
+  "runtime_seconds": 30.25
+}

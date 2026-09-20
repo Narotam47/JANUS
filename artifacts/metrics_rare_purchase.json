@@ -1,0 +1,111 @@
+{
+  "description": "False-positive rates on legitimate but unusual purchases",
+  "slice_criteria": {
+    "amount_unusual": "user_amount_zscore > 2.0",
+    "new_mcc": "first_mcc == 1 (first transaction at this MCC for user)",
+    "new_location": "first_city_state == 1 (first transaction in this city/state for user)",
+    "rare_any": "union of the three above",
+    "ordinary": "complement of rare_any (none of the above fire)"
+  },
+  "thresholds": {
+    "baseline": 0.9592928290367126,
+    "enriched": 0.9496600031852722
+  },
+  "results": {
+    "rare_any": {
+      "n_legit": 55736,
+      "baseline": {
+        "n_fp": 202,
+        "fp_rate": 0.003624,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 138,
+        "fp_rate": 0.002476,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": -31.68
+    },
+    "amount_unusual": {
+      "n_legit": 40080,
+      "baseline": {
+        "n_fp": 172,
+        "fp_rate": 0.004291,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 109,
+        "fp_rate": 0.00272,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": -36.61
+    },
+    "new_mcc": {
+      "n_legit": 1233,
+      "baseline": {
+        "n_fp": 17,
+        "fp_rate": 0.013788,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 29,
+        "fp_rate": 0.02352,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": 70.58
+    },
+    "new_location": {
+      "n_legit": 18548,
+      "baseline": {
+        "n_fp": 34,
+        "fp_rate": 0.001833,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 19,
+        "fp_rate": 0.001024,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": -44.14
+    },
+    "ordinary": {
+      "n_legit": 1769822,
+      "baseline": {
+        "n_fp": 342,
+        "fp_rate": 0.000193,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 311,
+        "fp_rate": 0.000176,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": -8.81
+    },
+    "all_legit": {
+      "n_legit": 1825558,
+      "baseline": {
+        "n_fp": 544,
+        "fp_rate": 0.000298,
+        "threshold": 0.9592928290367126
+      },
+      "enriched": {
+        "n_fp": 449,
+        "fp_rate": 0.000246,
+        "threshold": 0.9496600031852722
+      },
+      "relative_change_pct": -17.45
+    },
+    "fraud_recall": {
+      "n_fraud": 2283,
+      "baseline": {
+        "tp": 1507,
+        "recall": 0.6601
+      },
+      "enriched": {
+        "tp": 1645,
+        "recall": 0.7205
+      }
+    }
+  }
+}

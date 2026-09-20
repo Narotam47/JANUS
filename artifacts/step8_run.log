@@ -1,0 +1,100 @@
+2026-08-28 14:51:05,674 | INFO | janus.step8 | Enriched features: 33 columns
+2026-08-28 14:51:05,674 | INFO | janus.step8 | Merged temp files already exist — skipping merge step.
+2026-08-28 14:51:05,678 | INFO | janus.step8 | Loading merged train array into RAM ...
+2026-08-28 14:51:07,745 | INFO | janus.step8 | X_train: (7330071, 243) (7.1 GB)
+2026-08-28 14:51:07,758 | INFO | janus.step8 | Class balance: neg=7,320,851, pos=9,220, scale_pos_weight=794.0
+2026-08-28 14:51:07,758 | INFO | janus.step8 | Training enriched XGBoost (n_estimators=300, max_depth=6, 243 features) ...
+2026-08-28 14:51:07,758 | INFO | janus.step8 | (eval_set omitted to save 1.7 GB RAM — test eval after training)
+2026-08-28 15:10:27,688 | INFO | janus.step8 | Training time: 1159.9 s
+2026-08-28 15:10:28,029 | INFO | janus.step8 | Loading merged test array for evaluation ...
+2026-08-28 15:10:29,959 | INFO | janus.step8 | X_test: (1827841, 243)
+2026-08-28 15:10:29,959 | INFO | janus.step8 | Predicting on test set ...
+2026-08-28 15:10:31,348 | INFO | janus.step8 | ======================================================================
+2026-08-28 15:10:31,348 | INFO | janus.step8 | ENRICHED MODEL — HEADLINE METRICS
+2026-08-28 15:10:31,348 | INFO | janus.step8 | AUC-PR  (primary) : 0.817069
+2026-08-28 15:10:31,348 | INFO | janus.step8 | ROC-AUC (secondary): 0.999024
+2026-08-28 15:10:31,348 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,348 | INFO | janus.step8 | BEST-F1 THRESHOLD ANALYSIS
+2026-08-28 15:10:31,348 | INFO | janus.step8 | Threshold: 0.9497
+2026-08-28 15:10:31,348 | INFO | janus.step8 | F1: 0.7517 | Precision: 0.7856 | Recall: 0.7205
+2026-08-28 15:10:31,350 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,350 | INFO | janus.step8 | Classification report @ threshold=0.9497 (best F1):
+2026-08-28 15:10:31,517 | INFO | janus.step8 | 
+              precision    recall  f1-score   support
+
+           0     0.9997    0.9998    0.9997   1825558
+           1     0.7856    0.7205    0.7517      2283
+
+    accuracy                         0.9994   1827841
+   macro avg     0.8926    0.8601    0.8757   1827841
+weighted avg     0.9994    0.9994    0.9994   1827841
+
+2026-08-28 15:10:31,702 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,702 | INFO | janus.step8 | THRESHOLD SWEEP:
+2026-08-28 15:10:31,702 | INFO | janus.step8 | Threshold    Precision    Recall       F1          
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.1000       0.0659       0.9912       0.1236      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.2000       0.0963       0.9785       0.1753      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.3000       0.1273       0.9698       0.2251      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.4000       0.1628       0.9597       0.2784      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.5001       0.2034       0.9431       0.3347      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.6001       0.2558       0.9242       0.4007      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.7000       0.3276       0.9010       0.4805      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.8001       0.4402       0.8730       0.5853      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | 0.9000       0.6287       0.7994       0.7038      
+2026-08-28 15:10:31,702 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,702 | INFO | janus.step8 | Measuring single-window CPU inference latency ...
+2026-08-28 15:10:31,977 | INFO | janus.step8 | Latency (1000 runs): mean=0.268 ms, p95=0.298 ms
+2026-08-28 15:10:31,977 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,977 | INFO | janus.step8 | TOP 30 FEATURES BY IMPORTANCE (gain)
+2026-08-28 15:10:31,990 | INFO | janus.step8 | Rank  Feature                                   Importance  Notes
+2026-08-28 15:10:31,990 | INFO | janus.step8 | 1     chip_Chip Transaction_t1                      0.2516
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 2     merchant_user_count                           0.1156
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 3     first_city_state                              0.0369
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 4     merch_large_tx_rate                           0.0219
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 5     merch_hist_amount_mean                        0.0190
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 6     mcc_user_count                                0.0168
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 7     hours_since_last_t2                           0.0159
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 8     pop_7d_avg_count                              0.0135
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 9     month_t1                                      0.0124
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 10    amount_vs_last_year_ratio                     0.0118
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 11    day_of_week_t1                                0.0111
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 12    amount_log_t8                                 0.0110
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 13    merch_amount_deviation                        0.0106  ⚠ extreme z-scores (±70M) from near-zero-std merchants
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 14    err_bad_card_number_t0                        0.0096
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 15    user_amount_zscore                            0.0096
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 16    merch_days_active                             0.0094
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 17    err_bad_zipcode_t7                            0.0092
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 18    err_bad_zipcode_t9                            0.0086
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 19    hour_t9                                       0.0086
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 20    err_bad_cvv_t4                                0.0084
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 21    day_of_week_t3                                0.0082
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 22    day_of_week_t6                                0.0081
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 23    err_bad_cvv_t0                                0.0070
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 24    err_insufficient_balance_t9                   0.0069
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 25    same_month_last_year_mean                     0.0069
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 26    hour_t1                                       0.0069
+2026-08-28 15:10:31,991 | INFO | janus.step8 | 27    err_technical_glitch_t1                       0.0066
+2026-08-28 15:10:31,992 | INFO | janus.step8 | 28    err_bad_card_number_t5                        0.0062
+2026-08-28 15:10:31,992 | INFO | janus.step8 | 29    chip_Online Transaction_t9                    0.0062
+2026-08-28 15:10:31,992 | INFO | janus.step8 | 30    amount_raw_t5                                 0.0060
+2026-08-28 15:10:31,992 | INFO | janus.step8 | ======================================================================
+2026-08-28 15:10:31,992 | INFO | janus.step8 | SIDE-BY-SIDE COMPARISON: baseline → enriched
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Metric                   Baseline     Enriched        Delta
+2026-08-28 15:10:31,992 | INFO | janus.step8 | AUC-PR                   0.755584     0.817069      +0.0615
+2026-08-28 15:10:31,992 | INFO | janus.step8 | ROC-AUC                  0.998718     0.999024      +0.0003
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Best F1                    0.6954       0.7517      +0.0562
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Precision@F1               0.7348       0.7856      +0.0508
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Recall@F1                  0.6601       0.7205      +0.0604
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Threshold@F1               0.9593       0.9497      -0.0096
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Latency (mean)              0.280        0.268       -0.012 ms
+2026-08-28 15:10:31,992 | INFO | janus.step8 | Features                      210          243          +33
+2026-08-28 15:10:31,993 | INFO | janus.step8 | ----------------------------------------------------------------------
+2026-08-28 15:10:31,993 | INFO | janus.step8 | Peak memory (tracemalloc, excludes mmap): 7132.2 MB
+2026-08-28 15:10:32,006 | INFO | janus.step8 | Model saved: artifacts/model_enriched.json (2.1 MB)
+2026-08-28 15:10:32,074 | INFO | janus.step8 | Metrics saved: artifacts/metrics_enriched.json
+2026-08-28 15:10:32,151 | INFO | janus.step8 | Cleaned up _tmp_merged_train.npy (7.12 GB)
+2026-08-28 15:10:32,184 | INFO | janus.step8 | Cleaned up _tmp_merged_test.npy (1.78 GB)
+2026-08-28 15:10:32,184 | INFO | janus.step8 | ======================================================================
+2026-08-28 15:10:32,184 | INFO | janus.step8 | STEP 8 COMPLETE — enriched model trained and evaluated.
+2026-08-28 15:10:32,184 | INFO | janus.step8 | Compare: artifacts/metrics_enriched.json vs artifacts/metrics_baseline.json
+2026-08-28 15:10:32,184 | INFO | janus.step8 | ======================================================================

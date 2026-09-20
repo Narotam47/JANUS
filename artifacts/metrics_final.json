@@ -1,0 +1,286 @@
+{
+  "description": "Comprehensive final evaluation \u2014 baseline vs enriched vs hardened. Primary evidence artifact consolidating Phases 0-4.",
+  "model_comparison": {
+    "baseline": {
+      "auc_pr": 0.755584,
+      "best_f1_threshold": 0.959293,
+      "f1": 0.695431,
+      "precision": 0.734764,
+      "recall": 0.660096,
+      "latency_ms": {
+        "n_runs": 1000,
+        "mean_ms": 0.28,
+        "median_ms": 0.2721,
+        "p95_ms": 0.3566,
+        "p99_ms": 0.4216,
+        "min_ms": 0.2255,
+        "max_ms": 0.959
+      },
+      "latency_source": "reused from metrics_baseline.json (same frozen model, same benchmark methodology)"
+    },
+    "enriched": {
+      "auc_pr": 0.817069,
+      "best_f1_threshold": 0.94966,
+      "f1": 0.751656,
+      "precision": 0.785578,
+      "recall": 0.720543,
+      "latency_ms": {
+        "n_runs": 1000,
+        "mean_ms": 0.2684,
+        "median_ms": 0.266,
+        "p95_ms": 0.2982,
+        "p99_ms": 0.3705,
+        "min_ms": 0.2275,
+        "max_ms": 0.4495
+      },
+      "latency_source": "reused from metrics_enriched.json (same frozen model, same benchmark methodology)"
+    },
+    "hardened": {
+      "auc_pr": 0.918996,
+      "best_f1_threshold": 0.982279,
+      "f1": 0.865445,
+      "precision": 0.883615,
+      "recall": 0.848007,
+      "latency_ms": {
+        "n_runs": 1000,
+        "mean_ms": 0.1543,
+        "median_ms": 0.1524,
+        "p95_ms": 0.1822,
+        "p99_ms": 0.2227
+      },
+      "latency_source": "freshly benchmarked in this script, identical methodology"
+    }
+  },
+  "rare_purchase_evaluation": {
+    "baseline": {
+      "threshold": 0.959293,
+      "rare_any": {
+        "n_legit": 55736,
+        "n_fp": 202,
+        "fp_rate": 0.003624
+      },
+      "amount_unusual": {
+        "n_legit": 40080,
+        "n_fp": 172,
+        "fp_rate": 0.004291
+      },
+      "new_mcc": {
+        "n_legit": 1233,
+        "n_fp": 17,
+        "fp_rate": 0.013788
+      },
+      "new_location": {
+        "n_legit": 18548,
+        "n_fp": 34,
+        "fp_rate": 0.001833
+      },
+      "ordinary": {
+        "n_legit": 1769822,
+        "n_fp": 342,
+        "fp_rate": 0.000193
+      },
+      "all_legit": {
+        "n_legit": 1825558,
+        "n_fp": 544,
+        "fp_rate": 0.000298
+      }
+    },
+    "enriched": {
+      "threshold": 0.94966,
+      "rare_any": {
+        "n_legit": 55736,
+        "n_fp": 138,
+        "fp_rate": 0.002476
+      },
+      "amount_unusual": {
+        "n_legit": 40080,
+        "n_fp": 109,
+        "fp_rate": 0.00272
+      },
+      "new_mcc": {
+        "n_legit": 1233,
+        "n_fp": 29,
+        "fp_rate": 0.02352
+      },
+      "new_location": {
+        "n_legit": 18548,
+        "n_fp": 19,
+        "fp_rate": 0.001024
+      },
+      "ordinary": {
+        "n_legit": 1769822,
+        "n_fp": 311,
+        "fp_rate": 0.000176
+      },
+      "all_legit": {
+        "n_legit": 1825558,
+        "n_fp": 449,
+        "fp_rate": 0.000246
+      }
+    },
+    "hardened": {
+      "threshold": 0.982279,
+      "rare_any": {
+        "n_legit": 55736,
+        "n_fp": 83,
+        "fp_rate": 0.001489
+      },
+      "amount_unusual": {
+        "n_legit": 40080,
+        "n_fp": 69,
+        "fp_rate": 0.001722
+      },
+      "new_mcc": {
+        "n_legit": 1233,
+        "n_fp": 27,
+        "fp_rate": 0.021898
+      },
+      "new_location": {
+        "n_legit": 18548,
+        "n_fp": 5,
+        "fp_rate": 0.00027
+      },
+      "ordinary": {
+        "n_legit": 1769822,
+        "n_fp": 172,
+        "fp_rate": 9.7e-05
+      },
+      "all_legit": {
+        "n_legit": 1825558,
+        "n_fp": 255,
+        "fp_rate": 0.00014
+      }
+    }
+  },
+  "rare_purchase_new_mcc_regression": {
+    "enriched_fp_rate": 0.02352,
+    "hardened_fp_rate": 0.021898,
+    "pct_change": -6.9,
+    "hardening_helped": true
+  },
+  "adversarial_summary": {
+    "baseline": {
+      "note": "Not adversarially tested. The PPO attacker (step 20) targeted the enriched model specifically; no attack was ever run against the baseline model. Reporting this honestly as a gap, not inferring a number.",
+      "native_evasion_rate": null,
+      "transfer_evasion_rate": null,
+      "adaptive_evasion_rate": null
+    },
+    "enriched": {
+      "note": "Native evasion rate: the attacker was trained directly against this model (step 20). Not a transfer or adaptive test \u2014 this IS its own attack.",
+      "native_evasion_rate_deterministic": 0.5884498480243161,
+      "native_evasion_rate_harvest": 0.6650455927051672,
+      "transfer_evasion_rate": null,
+      "adaptive_evasion_rate": null
+    },
+    "hardened": {
+      "note": "transfer = the ENRICHED-trained attacker policy reused against this model, unmodified (tests whether the OLD exploit still works). adaptive = a BRAND-NEW attacker trained from scratch directly against this model (tests whether hardening is structural or just overfit to the old exploit's trajectories).",
+      "transfer_evasion_rate_deterministic": 0.004786979415988511,
+      "transfer_evasion_rate_harvest": 0.018190521780756343,
+      "adaptive_evasion_rate_deterministic": 0.48635710866443277,
+      "adaptive_evasion_rate_harvest": 0.6491144088080422,
+      "verdict": "overfit"
+    }
+  },
+  "position_bucket_evaluation": {
+    "bucket_definitions": [
+      {
+        "bucket": "early (<5k)",
+        "lo": 16,
+        "hi": 5000
+      },
+      {
+        "bucket": "mid (5k-15k)",
+        "lo": 5000,
+        "hi": 15000
+      },
+      {
+        "bucket": "late (15k+)",
+        "lo": 15000,
+        "hi": 10000000
+      }
+    ],
+    "baseline": [
+      {
+        "bucket": "early (<5k)",
+        "lo": 16,
+        "hi": 5000,
+        "n_windows": 55670,
+        "n_fraud": 74,
+        "aucpr": 0.8066565442850355
+      },
+      {
+        "bucket": "mid (5k-15k)",
+        "lo": 5000,
+        "hi": 15000,
+        "n_windows": 727371,
+        "n_fraud": 1294,
+        "aucpr": 0.7621555547143415
+      },
+      {
+        "bucket": "late (15k+)",
+        "lo": 15000,
+        "hi": 10000000,
+        "n_windows": 1044800,
+        "n_fraud": 915,
+        "aucpr": 0.754078280570661
+      }
+    ],
+    "enriched": [
+      {
+        "bucket": "early (<5k)",
+        "lo": 16,
+        "hi": 5000,
+        "n_windows": 55670,
+        "n_fraud": 74,
+        "aucpr": 0.9118662471363046
+      },
+      {
+        "bucket": "mid (5k-15k)",
+        "lo": 5000,
+        "hi": 15000,
+        "n_windows": 727371,
+        "n_fraud": 1294,
+        "aucpr": 0.8384580861014019
+      },
+      {
+        "bucket": "late (15k+)",
+        "lo": 15000,
+        "hi": 10000000,
+        "n_windows": 1044800,
+        "n_fraud": 915,
+        "aucpr": 0.7805005584671499
+      }
+    ],
+    "hardened": [
+      {
+        "bucket": "early (<5k)",
+        "lo": 16,
+        "hi": 5000,
+        "n_windows": 55670,
+        "n_fraud": 74,
+        "aucpr": 0.938306714582252
+      },
+      {
+        "bucket": "mid (5k-15k)",
+        "lo": 5000,
+        "hi": 15000,
+        "n_windows": 727371,
+        "n_fraud": 1294,
+        "aucpr": 0.9349696915523008
+      },
+      {
+        "bucket": "late (15k+)",
+        "lo": 15000,
+        "hi": 10000000,
+        "n_windows": 1044800,
+        "n_fraud": 915,
+        "aucpr": 0.8948923263904673
+      }
+    ],
+    "hardened_vs_enriched_pattern_note": "Hardening's benefit is UNEVEN across position buckets, but in the OPPOSITE direction from step 9b's original confound: gains are LARGER at late positions (+0.1144) than early ones (+0.0264). Step 9b's concern was that enriched-vs-baseline gains were biggest early and decayed with position \u2014 a signature of leaning on position-correlated features rather than genuine fraud signal. This reversed pattern does NOT match that signature: if hardening's improvement were just re-exploiting the same position confound, it should decay the same way, not grow. More consistent with hardening improving the decision boundary for well-established, long-history users specifically (which matches the harvested evasions and CTGAN fraud, both drawn from/modeling users with substantial history \u2014 fraud only occurs at position >= 68 by construction).",
+    "early_bucket_delta": 0.02644,
+    "late_bucket_delta": 0.114392
+  },
+  "cross_dataset_limitation": "All results in this project \u2014 baseline through hardened, calibration, drift monitoring, and adversarial robustness \u2014 are measured on ONE dataset: IBM TabFormer synthetic credit card transactions, with a single chronological 80/20 per-user train/test split. Sparkov and IEEE-CIS (two other commonly-used public fraud datasets) were NOT loaded, and no cross-dataset generalization test was performed. This means: every number in this report \u2014 AUC-PR, calibration, PSI drift, adversarial evasion rates \u2014 characterizes behavior on TabFormer's specific synthetic generation process, which may not transfer to real-world transaction distributions or to other datasets' fraud patterns and feature schemas. This is named explicitly as an untested generalization gap, not silently assumed away.",
+  "runtime_seconds": 4.52
+}

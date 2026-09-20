@@ -1,0 +1,321 @@
+{
+  "description": "Calibration and monotonicity diagnostics for the enriched model's raw probability output. Reporting only \u2014 the served model is unchanged.",
+  "task1_calibration": {
+    "base_rate": 0.001249,
+    "brier_score_model": 0.00343651,
+    "brier_score_baseline": 0.00124745,
+    "brier_skill_score": -1.7548,
+    "quantile_scheme": {
+      "requested_bins": 10,
+      "effective_bins": 10,
+      "collapsed": false,
+      "bins": [
+        {
+          "bin": "(-0.00099999141, 2.12e-06]",
+          "n": 182785,
+          "n_fraud": 0,
+          "mean_predicted": 1.18e-06,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(2.12e-06, 4.37e-06]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 3.18e-06,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(4.37e-06, 7.83e-06]",
+          "n": 182785,
+          "n_fraud": 0,
+          "mean_predicted": 5.95e-06,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(7.83e-06, 1.39e-05]",
+          "n": 182783,
+          "n_fraud": 0,
+          "mean_predicted": 1.057e-05,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(1.39e-05, 2.62e-05]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 1.935e-05,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(2.62e-05, 5.21e-05]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 3.752e-05,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(5.21e-05, 0.00011]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 7.699e-05,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(0.00011, 0.00027]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 0.00017464,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(0.00027, 0.00119]",
+          "n": 182784,
+          "n_fraud": 0,
+          "mean_predicted": 0.00056449,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "(0.00119, 1.0]",
+          "n": 182784,
+          "n_fraud": 2283,
+          "mean_predicted": 0.0869113,
+          "observed_fraction": 0.01249015
+        }
+      ],
+      "ece": 0.007531
+    },
+    "fixed_log_scheme": {
+      "bin_edges": [
+        0.0,
+        1e-06,
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        0.5,
+        0.7,
+        0.9,
+        0.97,
+        1.000000001
+      ],
+      "bins": [
+        {
+          "bin": "0",
+          "n": 72244,
+          "n_fraud": 0,
+          "mean_predicted": 5.9e-07,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "1",
+          "n": 554603,
+          "n_fraud": 0,
+          "mean_predicted": 4.58e-06,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "2",
+          "n": 630532,
+          "n_fraud": 0,
+          "mean_predicted": 3.708e-05,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "3",
+          "n": 373248,
+          "n_fraud": 0,
+          "mean_predicted": 0.00032603,
+          "observed_fraction": 0.0
+        },
+        {
+          "bin": "4",
+          "n": 112437,
+          "n_fraud": 1,
+          "mean_predicted": 0.00312943,
+          "observed_fraction": 8.89e-06
+        },
+        {
+          "bin": "5",
+          "n": 26765,
+          "n_fraud": 3,
+          "mean_predicted": 0.01782785,
+          "observed_fraction": 0.00011209
+        },
+        {
+          "bin": "6",
+          "n": 23675,
+          "n_fraud": 16,
+          "mean_predicted": 0.05672493,
+          "observed_fraction": 0.00067582
+        },
+        {
+          "bin": "7",
+          "n": 16951,
+          "n_fraud": 49,
+          "mean_predicted": 0.17796561,
+          "observed_fraction": 0.00289068
+        },
+        {
+          "bin": "8",
+          "n": 6802,
+          "n_fraud": 61,
+          "mean_predicted": 0.38969189,
+          "observed_fraction": 0.00896795
+        },
+        {
+          "bin": "9",
+          "n": 4305,
+          "n_fraud": 96,
+          "mean_predicted": 0.59389549,
+          "observed_fraction": 0.02229965
+        },
+        {
+          "bin": "10",
+          "n": 3376,
+          "n_fraud": 232,
+          "mean_predicted": 0.79736471,
+          "observed_fraction": 0.06872038
+        },
+        {
+          "bin": "11",
+          "n": 1199,
+          "n_fraud": 338,
+          "mean_predicted": 0.93673033,
+          "observed_fraction": 0.28190158
+        },
+        {
+          "bin": "12",
+          "n": 1704,
+          "n_fraud": 1487,
+          "mean_predicted": 0.99213225,
+          "observed_fraction": 0.87265258
+        }
+      ],
+      "ece": 0.007531,
+      "headline_ece": 0.007531
+    },
+    "top_bin_direction": "overconfident",
+    "calibration_verdict": "poor",
+    "recalibration_check_holdout": {
+      "n_holdout": 913921,
+      "raw": {
+        "brier_score": 0.00342874,
+        "brier_skill_score": -1.7474,
+        "ece": 0.007552
+      },
+      "platt": {
+        "brier_score": 0.00058277,
+        "brier_skill_score": 0.533,
+        "ece": 0.000691
+      },
+      "isotonic": {
+        "brier_score": 0.00044494,
+        "brier_skill_score": 0.6435,
+        "ece": 5.8e-05
+      },
+      "recommended": "isotonic",
+      "ece_improvement_platt": 0.006861,
+      "ece_improvement_isotonic": 0.007494
+    },
+    "needs_api_dashboard_calibration_warning": true,
+    "note": "Diagnostic recalibration was fit and evaluated on a 50/50 split of the TEST set purely to answer whether Platt/isotonic would help; no calibrator is applied to the served model."
+  },
+  "task2_monotonicity": {
+    "feature": "user_amount_zscore",
+    "method": "ICE sweep: grid over feature value, all other features held at each sampled transaction's observed values.",
+    "sample_size": 3000,
+    "grid_points": 41,
+    "grid_range": [
+      -2.8359,
+      4.4285
+    ],
+    "pct_rows_practically_monotonic": 87.13,
+    "pct_rows_strictly_monotonic": 10.43,
+    "mean_violations_per_row": 0.1747,
+    "mean_worst_drop_all_rows": 0.000454,
+    "mean_worst_drop_violators_only": 0.003471,
+    "pct_grid_steps_violating": 0.4367,
+    "aggregate_pdp_spearman_rho": 0.7744,
+    "aggregate_pdp_spearman_p": 2.841192940327234e-09,
+    "violation_severity": "material",
+    "empirical_confounded_comparison": {
+      "n_bins": 10,
+      "bins": [
+        {
+          "bin": 0,
+          "n": 182785,
+          "mean_zscore": -1.2664,
+          "mean_predicted": 0.004852,
+          "observed_fraud_rate": 0.001204
+        },
+        {
+          "bin": 1,
+          "n": 182784,
+          "mean_zscore": -0.5047,
+          "mean_predicted": 0.00667,
+          "observed_fraud_rate": 0.001286
+        },
+        {
+          "bin": 2,
+          "n": 182784,
+          "mean_zscore": -0.4001,
+          "mean_predicted": 0.005634,
+          "observed_fraud_rate": 0.001034
+        },
+        {
+          "bin": 3,
+          "n": 182784,
+          "mean_zscore": -0.3221,
+          "mean_predicted": 0.006016,
+          "observed_fraud_rate": 0.000957
+        },
+        {
+          "bin": 4,
+          "n": 182784,
+          "mean_zscore": -0.2257,
+          "mean_predicted": 0.006459,
+          "observed_fraud_rate": 0.000886
+        },
+        {
+          "bin": 5,
+          "n": 182784,
+          "mean_zscore": -0.0935,
+          "mean_predicted": 0.006626,
+          "observed_fraud_rate": 0.000733
+        },
+        {
+          "bin": 6,
+          "n": 182784,
+          "mean_zscore": 0.0725,
+          "mean_predicted": 0.006792,
+          "observed_fraud_rate": 0.000864
+        },
+        {
+          "bin": 7,
+          "n": 182784,
+          "mean_zscore": 0.2723,
+          "mean_predicted": 0.007226,
+          "observed_fraud_rate": 0.000875
+        },
+        {
+          "bin": 8,
+          "n": 182784,
+          "mean_zscore": 0.5599,
+          "mean_predicted": 0.009543,
+          "observed_fraud_rate": 0.001149
+        },
+        {
+          "bin": 9,
+          "n": 182784,
+          "mean_zscore": 1.7668,
+          "mean_predicted": 0.027987,
+          "observed_fraud_rate": 0.003501
+        }
+      ],
+      "spearman_zscore_vs_predicted": 0.8788,
+      "spearman_zscore_vs_observed_fraud_rate": -0.1394
+    }
+  }
+}

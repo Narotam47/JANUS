@@ -1,0 +1,116 @@
+{
+  "description": "Ablation studies: feature-group zero-out (no retraining) and routing-architecture ablations, evaluated against the enriched model's real probability outputs on the held-out test set.",
+  "methodology_caveats": {
+    "feature_ablation_is_approximation": "Zeroing a feature group on the ALREADY-TRAINED enriched model measures how much the trained model currently relies on that group at inference time \u2014 not the group's fundamental predictive value in a model retrained without it. A retrained model could compensate via correlated features that remain present.",
+    "zero_is_not_neutral": "Zero is not a 'this information is absent' signal for most of these columns: for flags, 0 is the ordinary majority category (a fairly clean ablation); for counts (user_tx_count, merchant_user_count, ...), 0 means 'brand new' \u2014 an extreme, specific value, not an absence of information; for unscaled means/ratios (user_hist_mean, user_amount_to_max_ratio, ...), 0 is often outside the realistic range altogether. Interpret magnitudes accordingly.",
+    "window_only_vs_step4_baseline": "The window_only ablation (AUC-PR=0.0113) is NOT expected to exactly reproduce step 4's separately-trained 210-feature baseline (AUC-PR=0.7556, delta=-0.7443) \u2014 it's the enriched model's trees, calibrated assuming enriched features carry real information, with those inputs forced to zero, not a model that never saw them."
+  },
+  "full_system": {
+    "auc_pr": 0.817069,
+    "best_threshold": 0.94966,
+    "f1": 0.751656,
+    "precision": 0.785578,
+    "recall": 0.720543,
+    "rare_purchase_fp_rate": {
+      "rare_any": 0.002476,
+      "amount_unusual": 0.00272,
+      "new_mcc": 0.02352,
+      "new_location": 0.001024
+    }
+  },
+  "feature_ablations": {
+    "minus_user_profile (14 cols zeroed)": {
+      "auc_pr": 0.182414,
+      "best_threshold": 0.351728,
+      "f1": 0.237493,
+      "precision": 0.318819,
+      "recall": 0.189225,
+      "rare_purchase_fp_rate": {
+        "rare_any": 0.003965,
+        "amount_unusual": 0.002495,
+        "new_mcc": 0.007299,
+        "new_location": 0.007548
+      },
+      "auc_pr_delta_vs_full": -0.634655,
+      "f1_delta_vs_full": -0.514163
+    },
+    "minus_merchant_features (9 cols zeroed)": {
+      "auc_pr": 0.428116,
+      "best_threshold": 0.208581,
+      "f1": 0.469455,
+      "precision": 0.506336,
+      "recall": 0.437582,
+      "rare_purchase_fp_rate": {
+        "rare_any": 0.00985,
+        "amount_unusual": 0.004491,
+        "new_mcc": 0.064071,
+        "new_location": 0.023291
+      },
+      "auc_pr_delta_vs_full": -0.388953,
+      "f1_delta_vs_full": -0.282201
+    },
+    "minus_first_occurrence_flags (10 cols zeroed)": {
+      "auc_pr": 0.815844,
+      "best_threshold": 0.94966,
+      "f1": 0.752121,
+      "precision": 0.78922,
+      "recall": 0.718353,
+      "rare_purchase_fp_rate": {
+        "rare_any": 0.002261,
+        "amount_unusual": 0.00272,
+        "new_mcc": 0.02352,
+        "new_location": 0.000377
+      },
+      "auc_pr_delta_vs_full": -0.001225,
+      "f1_delta_vs_full": 0.000465
+    },
+    "window_only (all 33 enriched cols zeroed)": {
+      "auc_pr": 0.011274,
+      "best_threshold": 0.078479,
+      "f1": 0.039411,
+      "precision": 0.049245,
+      "recall": 0.032852,
+      "rare_purchase_fp_rate": {
+        "rare_any": 0.003965,
+        "amount_unusual": 0.002171,
+        "new_mcc": 0.008921,
+        "new_location": 0.008842
+      },
+      "auc_pr_delta_vs_full": -0.805795,
+      "f1_delta_vs_full": -0.712245
+    }
+  },
+  "routing_ablations": {
+    "full_router": {
+      "n_block": 1424,
+      "n_stepup": 4323,
+      "n_approve": 1822094,
+      "block_tp": 1223,
+      "block_fp": 201,
+      "block_precision": 0.858848,
+      "rare_purchase_hard_block_rate": 0.000789,
+      "new_mcc_hard_block_rate": 0.0
+    },
+    "binary_only": {
+      "n_block": 2094,
+      "n_stepup": 0,
+      "n_approve": 1825747,
+      "block_tp": 1645,
+      "block_fp": 449,
+      "block_precision": 0.785578,
+      "rare_purchase_hard_block_rate": 0.002476,
+      "new_mcc_hard_block_rate": 0.02352
+    },
+    "no_confidence": {
+      "n_block": 2092,
+      "n_stepup": 0,
+      "n_approve": 1825749,
+      "block_tp": 1644,
+      "block_fp": 448,
+      "block_precision": 0.785851,
+      "rare_purchase_hard_block_rate": 0.002476,
+      "new_mcc_hard_block_rate": 0.02352
+    }
+  },
+  "runtime_seconds": 8.11
+}

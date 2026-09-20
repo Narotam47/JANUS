@@ -1,0 +1,53 @@
+{
+  "description": "Warm-start incremental update REJECTED \u2014 validation gate failed. model_enriched.json remains the active model; no promotion occurred.",
+  "honest_context": "The 'recent data' used for warm-start fine-tuning is the chronological tail of the TRAINING set (last 20% of training windows by row position) \u2014 not genuinely new live data. In production this would be newly labeled transactions from the live stream since the last training run. The warm-start mechanism, validation gate, and promote/reject artifact contract are unaffected by that distinction; this run demonstrates the machinery works end-to-end, not that a real-world update was warranted.",
+  "trigger": {
+    "should_retrain_decision": true,
+    "reason": "Feature 'pop_7d_avg_count' has PSI=5.8399, at or above the single-feature retrain threshold (0.25)."
+  },
+  "warm_start": {
+    "base_model": "artifacts/model_enriched.json",
+    "additional_rounds": 75,
+    "trees_before": 300,
+    "trees_after": 375,
+    "recent_slice_fraction": 0.2,
+    "recent_slice_size": 1466014,
+    "recent_slice_fraud_count": 1726,
+    "recent_slice_fraud_rate": 0.0011773420990522602,
+    "train_time_seconds": 11.24,
+    "xgb_params": {
+      "n_estimators": 75,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "tree_method": "hist",
+      "eval_metric": "aucpr",
+      "random_state": 42,
+      "n_jobs": -1,
+      "scale_pos_weight": 794.0
+    }
+  },
+  "gate": {
+    "current_model_metrics": {
+      "auc_pr": 0.8170694985524802,
+      "f1": 0.7516563856522732,
+      "precision": 0.7855778414517669,
+      "recall": 0.7205431449846693
+    },
+    "updated_model_metrics": {
+      "auc_pr": 0.7279705324659819,
+      "f1": 0.6601721794290892,
+      "precision": 0.6837165649929611,
+      "recall": 0.6381953569864214
+    },
+    "threshold_used": 0.9496600031852722,
+    "auc_pr_drop": 0.089099,
+    "f1_drop": 0.091484,
+    "auc_pr_max_drop": 0.005,
+    "f1_max_drop": 0.01,
+    "decision": "rejected",
+    "failed_conditions": [
+      "AUC-PR dropped 0.089099 (allowed <= 0.005)",
+      "F1@0.9497 dropped 0.091484 (allowed <= 0.01)"
+    ]
+  }
+}
